@@ -1,111 +1,114 @@
-# Arithmetic Intensity Calculation — Dominant Kernel
-**ECE 410/510 Spring 2026 — Codefest 2 CLLM**
-**Project: Ternary NN Inference Accelerator for Keyword Spotting**
+# Arithmetic Intensity Calculation
+**Project:** Ternary KWS Inference Accelerator  
+**ECE 410/510 Spring 2026**
 
 ---
 
-## Dominant Kernel Identified
+## Dominant Kernel
 
-From cProfile output (`project_profile.txt`), the function `ternary_linear` (which calls
-`numpy.dot`) is invoked **150 times** across 50 inference runs (3 calls/run — one per FC layer).
-It accounts for the vast majority of arithmetic operations in the forward pass.
+From profiling (`codefest/cf02/profiling/project_profile.txt`, 50 runs, cProfile):
 
-**Kernel:** Ternary fully-connected forward pass — matrix-vector multiply across all 3 layers:
-- Layer 1: input (40) × W1 (40 × 256) → hidden1 (256)
-- Layer 2: hidden1 (256) × W2 (256 × 128) → hidden2 (128)
-- Layer 3: hidden2 (128) × W3 (128 × 10) → logits (10)
+> **The dominant kernel is FC1 (1960 → 512 fully-connected layer), accounting for 93.8% of all floating-point operations (2,007,040 / 2,140,672 FLOPs).**
+
+Note: in the software simulation the `ternarize` function (on-the-fly weight quantization) consumes 75.6% of wall-clock time, but this is a software artifact. In the hardware target, weights are pre-quantized and stored in on-chip SRAM. The compute kernel that hardware accelerates is the matrix-vector multiply (`torch._C._nn.linear`, 9.7% of SW runtime), which in hardware becomes 100% of the compute workload.
 
 ---
 
-## Step 1 — Count FLOPs
+## FLOPs — Analytical Derivation
 
-Each FC layer: one multiply + one accumulate per weight = **2 FLOPs per weight**.
+For a single fully-connected layer with N_in inputs and N_out outputs, each output neuron requires N_in multiply-accumulate (MAC) operations. Each MAC = 1 multiply + 1 add = **2 FLOPs**.
 
+**Formula:**
 ```
-Layer 1:  2 × 40  × 256 =  20,480 FLOPs
-Layer 2:  2 × 256 × 128 =  65,536 FLOPs
-Layer 3:  2 × 128 × 10  =   2,560 FLOPs
+FLOPs(FC) = 2 × N_in × N_out
+```
+
+**FC1 (dominant kernel):**
+```
+FLOPs_FC1 = 2 × 1960 × 512
+           = 2 × 1,003,520
+           = 2,007,040 FLOPs
+```
+
+**Full network:**
+```
+FLOPs_FC1 = 2 × 1960 × 512 = 2,007,040
+FLOPs_FC2 = 2 ×  512 × 128 =   131,072
+FLOPs_FC3 = 2 ×  128 ×  10 =     2,560
 ─────────────────────────────────────────
-Total FLOPs = 20,480 + 65,536 + 2,560 = 88,576 FLOPs
+Total FLOPs                 = 2,140,672
 ```
 
-> Note: In hardware, ternary weights {-1, 0, +1} replace multipliers with conditional adders.
-> But for FLOPs counting we still charge 2 ops (1 multiply + 1 accumulate) per weight,
-> matching the software baseline which uses FP32 np.dot.
+FC1 fraction: 2,007,040 / 2,140,672 = **93.8%**
 
 ---
 
-## Step 2 — Count Bytes Transferred (no DRAM reuse)
+## Bytes Transferred — DRAM, No Reuse (Float32 Baseline)
 
-All weights and activations are assumed loaded from DRAM fresh each inference.
-Software baseline uses **FP32 (4 bytes per element)**.
+Assuming all operands are loaded from DRAM once per inference (worst-case, no cache reuse):
 
-### Weight bytes (load once per inference)
-```
-Layer 1 weights:  40  × 256 × 4 =  40,960 bytes
-Layer 2 weights:  256 × 128 × 4 = 131,072 bytes
-Layer 3 weights:  128 × 10  × 4 =   5,120 bytes
-─────────────────────────────────────────────────
-Total weight bytes = 177,152 bytes
-```
+| Operand | Dimensions | Element type | Bytes |
+|---|---|---|---|
+| Weight matrix **W** | 512 × 1960 | float32 (4 B) | 512 × 1960 × 4 = **4,014,080** |
+| Input vector **x** | 1960 × 1 | float32 (4 B) | 1960 × 4 = **7,840** |
+| Output vector **y** | 512 × 1 | float32 (4 B) | 512 × 4 = **2,048** |
+| **Total** | | | **4,023,968 bytes ≈ 3.84 MB** |
 
-### Activation bytes (load input + store/load each layer output)
-```
-Input  (40  elements): 40  × 4 =    160 bytes
-h1     (256 elements): 256 × 4 =  1,024 bytes
-h2     (128 elements): 128 × 4 =    512 bytes
-output (10  elements): 10  × 4 =     40 bytes
-─────────────────────────────────────────────
-Total activation bytes = 1,736 bytes
-```
+---
 
-### Total bytes
+## Arithmetic Intensity (Float32 Baseline)
+
 ```
-Total bytes = 177,152 + 1,736 = 178,888 bytes ≈ 174.7 KB
+AI_fp32 = FLOPs / Bytes
+        = 2,007,040 / 4,023,968
+        = 0.499 FLOP/byte
+        ≈ 0.50 FLOP/byte
 ```
 
 ---
 
-## Step 3 — Arithmetic Intensity
+## Bytes Transferred — Ternary Weights + Float32 Activations
+
+With ternary packing (2 bits per weight), the weight operand shrinks:
+
+| Operand | Dimensions | Element type | Bytes |
+|---|---|---|---|
+| Weight matrix **W** | 512 × 1960 | 2-bit ternary | 512 × 1960 × 2 / 8 = **250,880** |
+| Input vector **x** | 1960 × 1 | float32 (4 B) | **7,840** |
+| Output vector **y** | 512 × 1 | float32 (4 B) | **2,048** |
+| **Total** | | | **260,768 bytes ≈ 255 KB** |
 
 ```
-AI = Total FLOPs ÷ Total bytes
-   = 88,576 ÷ 178,888
-   = 0.495 FLOP/byte
+AI_ternary_DRAM = 2,007,040 / 260,768 = 7.70 FLOP/byte
 ```
+
+Even with ternary packing, the kernel remains memory-bound on the Apple M4 CPU (ridge point ≈ 33 FLOP/byte).
 
 ---
 
-## Step 4 — Placement on Apple M4 Roofline
+## Arithmetic Intensity — Hardware Accelerator (On-Chip Weights)
 
-| Hardware parameter     | Value                        |
-|------------------------|------------------------------|
-| Peak FP32 compute      | 230 GFLOPS                   |
-| Peak memory bandwidth  | 120 GB/s                     |
-| Ridge point            | 230 ÷ 120 = **1.92 FLOP/byte** |
+In the target hardware design, the 250,880-byte ternary weight matrix for FC1 fits entirely in on-chip SRAM. Only the input and output vectors cross the SPI interface:
+
+| Operand | Source | Bytes |
+|---|---|---|
+| Weight matrix **W** | On-chip SRAM (no interface traffic) | 0 |
+| Input vector **x** | SPI (INT16, 2 bytes/coeff) | 1960 × 2 = **3,920** |
+| Output vector **y** | SPI (INT16) | 512 × 2 = **1,024** |
+| **Total interface bytes** | | **4,944 bytes** |
 
 ```
-Kernel AI = 0.495 FLOP/byte  <  Ridge point = 1.92 FLOP/byte
-
-→ MEMORY-BOUND on Apple M4 CPU
-
-Attainable performance = AI × BW = 0.495 × 120 = 59.4 GFLOPS
+AI_hw = 2,007,040 / 4,944 = 406 FLOP/byte
 ```
 
-The kernel sits firmly in the memory-bound region. The weights dominate data movement —
-177 KB of weights vs only 1.7 KB of activations — so the bottleneck is DRAM bandwidth,
-not arithmetic throughput.
+This places the accelerator well above the ridge point of any realistic ASIC, making it **compute-bound**. See `codefest/cf02/profiling/roofline_project.png`.
 
 ---
 
 ## Summary
 
-| Metric               | Value            |
-|----------------------|------------------|
-| Total FLOPs          | 88,576           |
-| Weight bytes (FP32)  | 177,152 bytes    |
-| Activation bytes     | 1,736 bytes      |
-| **Total bytes**      | **178,888 bytes**|
-| **AI**               | **0.495 FLOP/byte** |
-| Bound (M4 CPU)       | **Memory-bound** |
-| Attainable perf      | 59.4 GFLOPS      |
+| Configuration | AI (FLOP/byte) | Bound |
+|---|---|---|
+| Float32, DRAM | 0.50 | Memory-bound (SW baseline) |
+| Ternary 2-bit, DRAM | 7.70 | Memory-bound |
+| Ternary 2-bit, on-chip weights | **406** | **Compute-bound (HW target)** |

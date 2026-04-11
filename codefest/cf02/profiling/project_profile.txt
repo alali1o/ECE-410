@@ -1,44 +1,75 @@
-# Project Algorithm Profile — Ternary NN Keyword Spotting
-# ECE 410/510 Spring 2026 | Codefest 2 CLLM
-# Platform: Apple M4 CPU | RAM: 16 GB LPDDR5x | BW: 120 GB/s
-# Model: 40 -> 256 -> 128 -> 10 (ternary FC, FP32 software baseline)
-# Runs profiled: 10000
-# Input: 40-dim MFCC frame (FP32), batch size = 1
-#
-# Dominant kernel identified: ternary_linear (np.dot) in forward_pass
-# This function accounts for >90% of all arithmetic operations.
-#
-======================================================================
-         230002 function calls in 0.117 seconds
+========================================================================
+cProfile — TernaryKWS keyword spotting inference (50 runs, batch=1)
+Platform: Apple M4 MacBook Air, macOS 15 (Darwin 25.3.0)
+Python 3.9.6, PyTorch 2.8.0, torch.no_grad(), CPU
+========================================================================
+
+         3964 function calls (3464 primitive calls) in 0.041 seconds
 
    Ordered by: cumulative time
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.018    0.018    0.117    0.117 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:58(run_inference_batch)
-    10000    0.007    0.000    0.086    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:51(forward_pass)
-    10000    0.014    0.000    0.033    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:41(softmax)
-    30000    0.031    0.000    0.033    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:45(ternary_linear)
-    20000    0.014    0.000    0.014    0.000 {method 'reduce' of 'numpy.ufunc' objects}
-    20000    0.013    0.000    0.013    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:38(relu)
-    10000    0.001    0.000    0.010    0.000 {method 'max' of 'numpy.ndarray' objects}
-    10000    0.004    0.000    0.010    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:1208(argmax)
-    10000    0.001    0.000    0.009    0.000 {method 'sum' of 'numpy.ndarray' objects}
-    10000    0.001    0.000    0.009    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/_methods.py:42(_amax)
-    10000    0.001    0.000    0.008    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/_methods.py:50(_sum)
-    10000    0.003    0.000    0.006    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:51(_wrapfunc)
-    10000    0.003    0.000    0.003    0.000 {method 'argmax' of 'numpy.ndarray' objects}
-    10000    0.003    0.000    0.003    0.000 {method 'astype' of 'numpy.ndarray' objects}
-    30000    0.002    0.000    0.002    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/multiarray.py:750(dot)
-    10000    0.001    0.000    0.001    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:1204(_argmax_dispatcher)
-    10000    0.001    0.000    0.001    0.000 {built-in method builtins.getattr}
-    10000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1769(_wrapped_call_impl)
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1777(_call_impl)
+       50    0.000    0.000    0.041    0.001 <stdin>:16(forward)
+      150    0.000    0.000    0.036    0.000 <stdin>:8(forward)
+      150    0.002    0.000    0.031    0.000 <stdin>:6(ternarize)
+      150    0.012    0.000    0.012    0.000 {method 'clamp' of 'torch._C.TensorBase' objects}
+      150    0.008    0.000    0.008    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+      150    0.005    0.000    0.005    0.000 {method 'sign' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {built-in method torch._C._nn.linear}
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:159(forward)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/functional.py:2786(batch_norm)
+      100    0.003    0.000    0.003    0.000 {built-in method torch.batch_norm}
+      100    0.001    0.000    0.001    0.000 {built-in method torch.relu}
+     1050    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1949(__getattr__)
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:339(_check_input_dim)
+      100    0.000    0.000    0.000    0.000 {method 'dim' of 'torch._C.TensorBase' objects}
+      300    0.000    0.000    0.000    0.000 {built-in method torch._C._get_tracing_state}
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/backends/__init__.py:38(__get__)
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._has_torch_function_variadic}
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._get_cudnn_enabled}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:84(__exit__)
+        2    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:184(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:80(__enter__)
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/utils/_contextlib.py:158(__new__)
+        2    0.000    0.000    0.000    0.000 {built-in method torch._C._set_grad_enabled}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:75(__init__)
+        3    0.000    0.000    0.000    0.000 {built-in method torch.is_grad_enabled}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x1035fa860}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/_jit_internal.py:106(is_scripting)
 
 
 
-# Wall-clock timing over 10000 runs (single frame, batch=1):
-#   Mean:     7.37 µs/inference
-#   Median:   6.83 µs/inference
-#   Min:      5.50 µs/inference
-#   Max:      113.25 µs/inference
-#   Std dev:  4.15 µs
+--- Sorted by tottime (time in function body only) ---
+
+         3964 function calls (3464 primitive calls) in 0.041 seconds
+
+   Ordered by: internal time
+   List reduced from 31 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      150    0.012    0.000    0.012    0.000 {method 'clamp' of 'torch._C.TensorBase' objects}
+      150    0.008    0.000    0.008    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+      150    0.005    0.000    0.005    0.000 {method 'sign' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {built-in method torch._C._nn.linear}
+      100    0.003    0.000    0.003    0.000 {built-in method torch.batch_norm}
+      150    0.002    0.000    0.031    0.000 <stdin>:6(ternarize)
+      100    0.001    0.000    0.001    0.000 {built-in method torch.relu}
+      150    0.000    0.000    0.036    0.000 <stdin>:8(forward)
+     1050    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1949(__getattr__)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:159(forward)
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1777(_call_impl)
+       50    0.000    0.000    0.041    0.001 <stdin>:16(forward)
+      100    0.000    0.000    0.000    0.000 {method 'dim' of 'torch._C.TensorBase' objects}
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1769(_wrapped_call_impl)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/functional.py:2786(batch_norm)
+      300    0.000    0.000    0.000    0.000 {built-in method torch._C._get_tracing_state}
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:339(_check_input_dim)
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/backends/__init__.py:38(__get__)
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._has_torch_function_variadic}
+
+
