@@ -1,0 +1,44 @@
+# Project Algorithm Profile — Ternary NN Keyword Spotting
+# ECE 410/510 Spring 2026 | Codefest 2 CLLM
+# Platform: Apple M4 CPU | RAM: 16 GB LPDDR5x | BW: 120 GB/s
+# Model: 40 -> 256 -> 128 -> 10 (ternary FC, FP32 software baseline)
+# Runs profiled: 10000
+# Input: 40-dim MFCC frame (FP32), batch size = 1
+#
+# Dominant kernel identified: ternary_linear (np.dot) in forward_pass
+# This function accounts for >90% of all arithmetic operations.
+#
+======================================================================
+         230002 function calls in 0.117 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.018    0.018    0.117    0.117 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:58(run_inference_batch)
+    10000    0.007    0.000    0.086    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:51(forward_pass)
+    10000    0.014    0.000    0.033    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:41(softmax)
+    30000    0.031    0.000    0.033    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:45(ternary_linear)
+    20000    0.014    0.000    0.014    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+    20000    0.013    0.000    0.013    0.000 /Users/manafalali/Desktop/ECE-410/codefest/cf02/profiling/profile_project.py:38(relu)
+    10000    0.001    0.000    0.010    0.000 {method 'max' of 'numpy.ndarray' objects}
+    10000    0.004    0.000    0.010    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:1208(argmax)
+    10000    0.001    0.000    0.009    0.000 {method 'sum' of 'numpy.ndarray' objects}
+    10000    0.001    0.000    0.009    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/_methods.py:42(_amax)
+    10000    0.001    0.000    0.008    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/_methods.py:50(_sum)
+    10000    0.003    0.000    0.006    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:51(_wrapfunc)
+    10000    0.003    0.000    0.003    0.000 {method 'argmax' of 'numpy.ndarray' objects}
+    10000    0.003    0.000    0.003    0.000 {method 'astype' of 'numpy.ndarray' objects}
+    30000    0.002    0.000    0.002    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/multiarray.py:750(dot)
+    10000    0.001    0.000    0.001    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/numpy/_core/fromnumeric.py:1204(_argmax_dispatcher)
+    10000    0.001    0.000    0.001    0.000 {built-in method builtins.getattr}
+    10000    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+
+# Wall-clock timing over 10000 runs (single frame, batch=1):
+#   Mean:     7.37 µs/inference
+#   Median:   6.83 µs/inference
+#   Min:      5.50 µs/inference
+#   Max:      113.25 µs/inference
+#   Std dev:  4.15 µs
