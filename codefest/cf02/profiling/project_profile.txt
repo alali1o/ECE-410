@@ -1,0 +1,75 @@
+========================================================================
+cProfile — TernaryKWS keyword spotting inference (50 runs, batch=1)
+Platform: Apple M4 MacBook Air, macOS 15 (Darwin 25.3.0)
+Python 3.9.6, PyTorch 2.8.0, torch.no_grad(), CPU
+========================================================================
+
+         3964 function calls (3464 primitive calls) in 0.041 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1769(_wrapped_call_impl)
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1777(_call_impl)
+       50    0.000    0.000    0.041    0.001 <stdin>:16(forward)
+      150    0.000    0.000    0.036    0.000 <stdin>:8(forward)
+      150    0.002    0.000    0.031    0.000 <stdin>:6(ternarize)
+      150    0.012    0.000    0.012    0.000 {method 'clamp' of 'torch._C.TensorBase' objects}
+      150    0.008    0.000    0.008    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+      150    0.005    0.000    0.005    0.000 {method 'sign' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {built-in method torch._C._nn.linear}
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:159(forward)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/functional.py:2786(batch_norm)
+      100    0.003    0.000    0.003    0.000 {built-in method torch.batch_norm}
+      100    0.001    0.000    0.001    0.000 {built-in method torch.relu}
+     1050    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1949(__getattr__)
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:339(_check_input_dim)
+      100    0.000    0.000    0.000    0.000 {method 'dim' of 'torch._C.TensorBase' objects}
+      300    0.000    0.000    0.000    0.000 {built-in method torch._C._get_tracing_state}
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/backends/__init__.py:38(__get__)
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._has_torch_function_variadic}
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._get_cudnn_enabled}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:84(__exit__)
+        2    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:184(__init__)
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:80(__enter__)
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/utils/_contextlib.py:158(__new__)
+        2    0.000    0.000    0.000    0.000 {built-in method torch._C._set_grad_enabled}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/autograd/grad_mode.py:75(__init__)
+        3    0.000    0.000    0.000    0.000 {built-in method torch.is_grad_enabled}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x1035fa860}
+        1    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/_jit_internal.py:106(is_scripting)
+
+
+
+--- Sorted by tottime (time in function body only) ---
+
+         3964 function calls (3464 primitive calls) in 0.041 seconds
+
+   Ordered by: internal time
+   List reduced from 31 to 20 due to restriction <20>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      150    0.012    0.000    0.012    0.000 {method 'clamp' of 'torch._C.TensorBase' objects}
+      150    0.008    0.000    0.008    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+      150    0.005    0.000    0.005    0.000 {method 'sign' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+      150    0.004    0.000    0.004    0.000 {built-in method torch._C._nn.linear}
+      100    0.003    0.000    0.003    0.000 {built-in method torch.batch_norm}
+      150    0.002    0.000    0.031    0.000 <stdin>:6(ternarize)
+      100    0.001    0.000    0.001    0.000 {built-in method torch.relu}
+      150    0.000    0.000    0.036    0.000 <stdin>:8(forward)
+     1050    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1949(__getattr__)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:159(forward)
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1777(_call_impl)
+       50    0.000    0.000    0.041    0.001 <stdin>:16(forward)
+      100    0.000    0.000    0.000    0.000 {method 'dim' of 'torch._C.TensorBase' objects}
+   300/50    0.000    0.000    0.041    0.001 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py:1769(_wrapped_call_impl)
+      100    0.000    0.000    0.003    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/functional.py:2786(batch_norm)
+      300    0.000    0.000    0.000    0.000 {built-in method torch._C._get_tracing_state}
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/batchnorm.py:339(_check_input_dim)
+      100    0.000    0.000    0.000    0.000 /Users/manafalali/Library/Python/3.9/lib/python/site-packages/torch/backends/__init__.py:38(__get__)
+      100    0.000    0.000    0.000    0.000 {built-in method torch._C._has_torch_function_variadic}
+
+
