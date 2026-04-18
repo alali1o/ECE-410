@@ -32,16 +32,17 @@ This makes intuitive sense: the weight matrices are small (FC1 is only 40×256 =
 
 ## Measured Results (T4, Colab)
 
-<!-- Fill in after running ./nn_forward on Colab -->
-
 | Metric | Value |
 |--------|-------|
-| Time per forward pass | ___ ms |
-| GPU throughput | ___ samples/s |
-| Performance | ___ GFLOP/s |
-| Bandwidth | ___ GB/s |
-| CPU baseline (single-thread) | ___ ms |
-| GPU speedup | ___× |
+| Time per forward pass | 0.119 ms |
+| GPU throughput | 2,148,614 samples/s |
+| Performance | 190.32 GFLOP/s |
+| Bandwidth | 8.52 GB/s |
+| Arithmetic Intensity | 22.3 FLOP/byte |
+| CPU baseline (single-thread) | 13.245 ms |
+| **GPU speedup** | **111.2×** |
+
+The measured AI (22.3 FLOP/byte) confirms the kernel is memory-bound — just below the T4 ridge of 27. The GPU still achieves 111× over a single-threaded CPU because parallelism hides latency even when bandwidth is the bottleneck.
 
 ## Comparison to CLLM GEMM Kernels
 
