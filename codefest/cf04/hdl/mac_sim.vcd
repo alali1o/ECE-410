@@ -1,0 +1,103 @@
+$date
+	Thu Apr 23 22:18:33 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module mac_tb $end
+$var wire 32 ! out [31:0] $end
+$var reg 8 " a [7:0] $end
+$var reg 8 # b [7:0] $end
+$var reg 1 $ clk $end
+$var reg 1 % rst $end
+$var integer 32 & errors [31:0] $end
+$scope module dut $end
+$var wire 8 ' a [7:0] $end
+$var wire 8 ( b [7:0] $end
+$var wire 1 $ clk $end
+$var wire 1 % rst $end
+$var reg 32 ) out [31:0] $end
+$upscope $end
+$scope task check $end
+$var reg 32 * expected [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx *
+bx )
+b0 (
+b0 '
+b0 &
+1%
+0$
+b0 #
+b0 "
+bx !
+$end
+#5000
+b0 !
+b0 )
+1$
+#6000
+b100 #
+b100 (
+b11 "
+b11 '
+0%
+#10000
+0$
+#15000
+b1100 !
+b1100 )
+1$
+#20000
+0$
+#25000
+b11000 !
+b11000 )
+1$
+#30000
+0$
+#35000
+b100100 !
+b100100 )
+1$
+#36000
+b0 #
+b0 (
+b0 "
+b0 '
+1%
+#40000
+0$
+#45000
+b0 !
+b0 )
+1$
+#46000
+b10 #
+b10 (
+b11111011 "
+b11111011 '
+0%
+#50000
+0$
+#55000
+b11111111111111111111111111110110 !
+b11111111111111111111111111110110 )
+1$
+#60000
+0$
+#65000
+b11111111111111111111111111101100 !
+b11111111111111111111111111101100 )
+1$
+#66000
