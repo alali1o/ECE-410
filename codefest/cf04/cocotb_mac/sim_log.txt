@@ -1,0 +1,43 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+/Users/manafalali/Library/Python/3.9/lib/python/site-packages/cocotb_tools/makefiles/simulators/Makefile.icarus:65: Using MODULE is deprecated, please use COCOTB_TEST_MODULES instead.
+rm -f results.xml
+COCOTB_TEST_MODULES=test_mac COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=mac TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/manafalali/Library/Python/3.9/lib/python/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:94   in _embed_init_python              Using Python 3.9.13 interpreter at /Library/Developer/CommandLineTools/usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 13.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777010078
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /Users/manafalali/Library/Python/3.9/lib/python/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_mac.test_mac_basic (1/2)
+                                                            a=3,b=4 for 3 cycles -> rst -> a=-5,b=2 for 2 cycles
+    10.00ns INFO     cocotb.mac                         out = 12  (expected 12)  PASS
+    20.00ns INFO     cocotb.mac                         out = 24  (expected 24)  PASS
+    30.00ns INFO     cocotb.mac                         out = 36  (expected 36)  PASS
+    40.00ns INFO     cocotb.mac                         out = 0  (expected 0 after rst)  PASS
+    50.00ns INFO     cocotb.mac                         out = -10  (expected -10)  PASS
+    60.00ns INFO     cocotb.mac                         out = -20  (expected -20)  PASS
+    60.00ns INFO     cocotb.regression                  test_mac.test_mac_basic passed
+    60.00ns INFO     cocotb.regression                  running test_mac.test_mac_overflow (2/2)
+                                                            Extended accumulation (50 cycles, a=3 b=4) proves linear growth — no saturation.
+    70.00ns INFO     cocotb.mac                         Accumulating 50 cycles (a=3, b=4, product=12/cycle)
+    80.00ns INFO     cocotb.mac                         Cycle  1: out = 12  (+12)  PASS
+    90.00ns INFO     cocotb.mac                         Cycle  2: out = 24  (+12)  PASS
+   100.00ns INFO     cocotb.mac                         Cycle  3: out = 36  (+12)  PASS
+   110.00ns INFO     cocotb.mac                         Cycle  4: out = 48  (+12)  PASS
+   120.00ns INFO     cocotb.mac                         Cycle  5: out = 60  (+12)  PASS
+   570.00ns INFO     cocotb.mac                         Cycle 50: out = 600  (+12)  PASS
+   570.00ns INFO     cocotb.mac                         All 50 cycles: linear growth confirmed, delta = 12/cycle
+   570.00ns INFO     cocotb.mac                         Behavior: WRAP (two's complement) — no saturation logic in mac_correct.v
+   570.00ns INFO     cocotb.mac                         Full overflow at ~178,956,971 cycles; accumulator wraps to large negative
+   570.00ns INFO     cocotb.regression                  test_mac.test_mac_overflow passed
+   570.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** test_mac.test_mac_basic        PASS          60.00           0.00      47735.67  **
+                                                        ** test_mac.test_mac_overflow     PASS         510.00           0.00     110650.69  **
+                                                        **************************************************************************************
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                570.00           0.01      53566.18  **
+                                                        **************************************************************************************
