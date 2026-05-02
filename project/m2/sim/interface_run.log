@@ -1,0 +1,9 @@
+VCD info: dumpfile sim/waveform_if.vcd opened for output.
+[TB] Test 1 — SPI Write: addr=0x01 data=0xA5
+  PASS — register write captured correctly (addr=0x1, data=0xa5)
+[TB] Test 2 — SPI Read:  addr=0x81 (R/W#=1, addr=0x01)
+  PASS — MISO returned 0xa5 as expected
+--------------------------------------------
+PASS — all SPI interface tests passed
+--------------------------------------------
+tb/tb_interface.sv:179: $finish called at 2890000 (1ps)

@@ -1,0 +1,12 @@
+VCD info: dumpfile sim/waveform.vcd opened for output.
+[TB] Loading 32 weights...
+[TB] Pulsing start...
+[TB] Checking outputs:
+  y[0] =   12   OK
+  y[1] =   12   OK
+  y[2] =    6   OK
+  y[3] =   -8   OK
+--------------------------------------------
+PASS — all 4 outputs match golden reference
+--------------------------------------------
+tb/tb_compute_core.sv:143: $finish called at 510000 (1ps)
