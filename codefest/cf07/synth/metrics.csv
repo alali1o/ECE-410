@@ -1,0 +1,2 @@
+design,tool,version,clock_period_ns,clock_freq_mhz,worst_slack_ns,timing_met,total_cells,comb_cells,seq_cells,total_area_um2_est,nand_count,xnor_count,and_count,or_count,ff_sdffe_count,nor_count,xor_count,notes
+ternary_mac_array,Yosys,0.65,10.0,100.0,+8.5,YES,264,231,33,609,76,39,38,38,32,16,18,Technology-independent synthesis (sky130 area/timing estimated). OpenLane 2 requires Docker unavailable on this host.
