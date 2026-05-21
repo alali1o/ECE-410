@@ -1,0 +1,16 @@
+VCD info: dumpfile sim/cosim_waveform.vcd opened for output.
+=== M3 End-to-End Co-Simulation ===
+Input: x = [10, -5, 3, 7, -2, 8, 0, 4]
+Expected: y = [12, 12, 6, -8], argmax = 0
+---
+[TB] Weight init complete. Starting SPI transactions.
+[TB] Writing 16 feature bytes to reg[0]...
+[TB] Feature load complete.
+[TB] Writing start to reg[1]...
+[TB] Polling status reg[3]...
+[TB] Status done after 1 polls. reg[3] = 0x01
+[TB] reg[2] = result = 0  (expected 0)
+---
+PASS — end-to-end inference correct: argmax = 0
+=================================
+tb/tb_top.sv:246: $finish called at 34745000 (1ps)

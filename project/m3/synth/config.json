@@ -1,0 +1,21 @@
+{
+    "DESIGN_NAME": "top",
+    "VERILOG_FILES": [
+        "dir::../rtl/spi_slave_ext.sv",
+        "dir::../../m2/rtl/compute_core.sv",
+        "dir::../rtl/top.sv"
+    ],
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 10.0,
+    "PDK": "sky130A",
+    "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+    "SYNTH_STRATEGY": "AREA 0",
+    "FP_CORE_UTIL": 50,
+    "PL_TARGET_DENSITY": 0.45,
+    "SYNTH_PARAMETERS": [
+        "N_IN=8",
+        "N_OUT=4",
+        "X_W=16",
+        "ACC_W=32"
+    ]
+}

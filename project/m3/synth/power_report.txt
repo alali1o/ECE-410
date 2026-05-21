@@ -1,0 +1,30 @@
+Power Report — M3 Synthesis (estimated, no OpenLane run)
+ECE 410/510 Spring 2026 — Ternary KWS Inference Accelerator
+Design: top (N_IN=8, N_OUT=4, X_W=16, ACC_W=32)
+
+NOTE: OpenLane 2 did not complete (Tcl interpreter error, see openlane_run.log).
+Power estimation via OpenSTA/OpenRoad was not possible this milestone.
+Estimates below are derived from Yosys cell counts and sky130 published data.
+
+=== Estimated Power (sky130_fd_sc_hd, 1.8V, 100 MHz, α=0.1 switching) ===
+
+  Flip-flop dynamic power:
+    433 FFs × 5 fW/Hz/FF × 100 MHz × 0.1 = ~21.7 µW
+
+  Combinational dynamic power:
+    2442 cells × 2 fW/Hz/cell × 100 MHz × 0.1 = ~48.8 µW
+
+  Estimated leakage (433 FFs + 2442 combo × 0.2 µW avg per cell):
+    ~575 µW
+
+  Total estimated power: ~650 µW (0.65 mW)
+
+This is within the expected range for a small accelerator on sky130.
+Actual power from OpenLane (with activity factors from simulation) will
+be more accurate and is planned for M4.
+
+=== M4 Power Estimation Plan ===
+
+1. Fix OpenLane 2 environment (Python 3.9 / Tcl conflict on macOS)
+2. Run full OpenLane with activity file generated from VCD simulation
+3. Report dynamic + static power from OpenSTA power analysis

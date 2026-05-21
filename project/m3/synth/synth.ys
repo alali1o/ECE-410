@@ -1,0 +1,25 @@
+# Yosys synthesis script for top module
+# ECE 410/510 M3 — Ternary KWS Accelerator
+# Target: Sky130 standard cells (via synth_ice40 as proxy for area estimation)
+
+read_verilog -sv ../rtl/spi_slave_ext.sv
+read_verilog -sv ../../m2/rtl/compute_core.sv
+read_verilog -sv ../rtl/top.sv
+
+# Set parameters matching simulation
+chparam -set N_IN 8 -set N_OUT 4 -set X_W 16 -set ACC_W 32 top
+
+# Synthesize
+synth -top top -flatten
+
+# Technology mapping using internal cells for portability
+techmap
+
+# Optimize
+opt -full
+
+# Statistics
+stat
+
+# Write synthesized netlist
+write_verilog -noattr synth_out.v
