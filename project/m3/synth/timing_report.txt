@@ -1,0 +1,51 @@
+Timing Report — M3 Synthesis (Yosys 0.65, generic cells)
+ECE 410/510 Spring 2026 — Ternary KWS Inference Accelerator
+Design: top (N_IN=8, N_OUT=4, X_W=16, ACC_W=32)
+Clock: clk, period = 10.0 ns (100 MHz target)
+
+NOTE: Full OpenLane 2 / OpenSTA flow failed (see openlane_run.log).
+Formal STA with sky130 cell libraries was not completed.
+Timing estimates below are based on Yosys generic-cell synthesis
+and manual analysis of the critical path.
+
+=== Critical Path Analysis ===
+
+Most critical path (estimated):
+
+  Start: spi_slave_ext.rx_shift[14:0] flip-flop (SDFFE)
+         — SCLK rising edge detected, MOSI sampled into shift register
+
+  Logic stages:
+    1. sclk_rise detection (3-FF sync chain + edge detect AND/NOT)
+    2. rx_shift shift-left + mosi_s2 insertion (2 MUX levels)
+    3. bit_cnt comparison == 7 (8-bit comparator, ~4 XOR/XNOR + AND tree)
+    4. addr_latch capture (MUX select + DFF setup)
+
+  End: spi_slave_ext.addr_latch flip-flop (SDFFE)
+
+Estimated combinational depth: ~10–12 logic stages
+Estimated path delay (sky130 @ 1.5 ns/stage avg): ~15–18 ns
+
+This path violates the 10 ns clock period (100 MHz target).
+
+=== Timing Summary ===
+
+  Target clock period:      10.0 ns
+  Estimated critical path:  ~16  ns (from SPI synchronizer chain)
+  Estimated WNS (worst negative slack): ~−6 ns
+
+=== Recommended Fix ===
+
+The SPI synchronizer + shift-register path is timing-critical because:
+  - 3 synchronizer FFs + edge-detect combinational delay chains are
+    all inside one clock period
+  - The 16-bit rx_shift shift and bit_cnt comparison add further stages
+
+To close timing:
+  1. Reduce clock frequency to 50 MHz (20 ns period → ~4 ns slack)
+  2. Pipeline the shift-register load and addr_latch capture across two cycles
+  3. Or use a dedicated SPI clock domain and a proper CDC handshake
+
+For M4, option 1 (50 MHz, 20 ns clock period) is the most practical
+scope-preserving fix. The compute_core MAC pipeline closes at 100 MHz;
+only the SPI interface is timing-critical.

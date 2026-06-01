@@ -1,0 +1,56 @@
+Area Report — M3 Synthesis (Yosys 0.65, generic technology cells)
+ECE 410/510 Spring 2026 — Ternary KWS Inference Accelerator
+Design: top (N_IN=8, N_OUT=4, X_W=16, ACC_W=32)
+Run date: 2026-05-21
+
+NOTE: Full OpenLane 2 flow failed (see openlane_run.log for error).
+Yosys was run directly to complete synthesis. Cell counts below are in
+Yosys generic cells (post-techmap); sky130 equivalents are estimated.
+A sky130-mapped run would require OpenLane to complete fully.
+
+=== Yosys Post-Optimization Cell Count ===
+
+Total cells: 2877
+
+Sequential cells:
+  $_SDFFE_PN0P_       304   (synchronous DFF with enable, active-low reset)
+  $_SDFFCE_PN0P_       24   (synchronous DFF with clock enable + reset)
+  $_DFFE_PP_           79   (DFF with enable)
+  $_DFF_P_              7   (plain DFF)
+  $_SDFFE_PN0N_         3
+  $_SDFF_PN0_          12
+  $_SDFF_PN1_           3
+  $_SDFF_PP0_           1
+  ─────────────────────────
+  Total flip-flops:   433
+
+Combinational cells:
+  $_AND_              844
+  $_NAND_             691
+  $_OR_               178
+  $_NOR_               78
+  $_ORNOT_            111
+  $_ANDNOT_           155
+  $_XNOR_             168
+  $_XOR_                8
+  $_NOT_               23
+  $_MUX_              186
+  ─────────────────────────
+  Total combinational: 2442
+
+Wire bits: 3746
+
+=== Sky130 Area Estimate (approximate) ===
+
+Assuming avg 1.5 µm² per standard cell (sky130_fd_sc_hd baseline):
+  Estimated cell area: 2877 × 1.5 µm² ≈ 4316 µm²
+  Estimated die area (at 50% utilization): ~8600 µm² ≈ 93 µm × 93 µm
+
+These are rough estimates. Actual sky130 area from a full OpenLane run
+would differ based on cell-specific sizes and routing overhead.
+
+=== Module Breakdown (estimated) ===
+
+  compute_core (N_IN=8, N_OUT=4): ~1800 cells (weight RAM + MAC FSM + accumulators)
+  spi_slave_ext:                  ~600  cells (synchronizers + shift regs + reg file)
+  top (glue logic):               ~477  cells (weight init FSM + feat buffer + argmax + result FSM)
