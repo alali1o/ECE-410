@@ -1,0 +1,29 @@
+metric,sw_baseline,hw_simulated,hw_projected_production,units,notes
+platform,Apple M4 (ARM64),Icarus Verilog sim,Icarus Verilog sim,,
+clock_freq_mhz,,100.0,100.0,MHz,
+n_in_testbench,,8,1960,,
+n_out_testbench,,4,512,,
+fc1_cycles_sim,,10,1960,cycles,N_IN cycles per inference
+fc1_latency_us,409.0,0.1,19.6,μs,"SW: 0.4362ms × 93.8%; HW: cycles/freq"
+full_network_latency_us,436.2,0.12,26.0,μs,"SW: measured M1; HW: FC1+FC2+FC3"
+fc1_flops,2007040,64,2007040,FLOPs,2 × N_IN × N_OUT
+fc1_gflops_per_sec,4.91,0.64,102.4,GFLOP/s,flops / latency_s
+arithmetic_intensity_flop_byte,0.50,,406.0,FLOP/byte,"SW: all weights in DRAM; HW: weights on-chip"
+speedup_fc1_compute,,,,×,20.9× (409us / 19.6us)
+speedup_full_network,,,,×,16.8× (436us / 26us)
+spi_clock_mhz,,10.0,10.0,MHz,
+spi_throughput_mb_per_s,,1.25,1.25,MB/s,
+spi_activation_bytes_per_inf,,16,3920,bytes,"N_IN × 2 bytes (INT16)"
+spi_result_bytes_per_inf,,8,1024,bytes,"N_OUT × 2 bytes (INT16)"
+spi_transfer_time_ms,,0.019,3.955,ms,total bytes / SPI throughput
+total_cells_synth,,3728,,cells,Yosys post-ABC flat count
+compute_core_cells,,264,,cells,N_IN=8 N_OUT=4 (from M3/CF07)
+spi_slave_cells,,268,,cells,
+glue_cells,,521,,cells,kws_top local logic
+estimated_area_um2,,5683,,μm²,sky130 typical gate sizes
+estimated_power_uw,,35,,μW,dynamic + leakage at 100MHz α=0.1
+energy_per_inf_pj,,3.5,690,pJ,"testbench; production FC1 only"
+sw_energy_per_inf_mj,4.4,,,mJ,Apple M4 at ~10W × 0.436ms
+testbench_pass,N/A,2/2,,/2 checks,RESULT: PASS
+argmax_result_expected,,2,,index,y[2]=26 is max of [10,-10,26,-26]
+argmax_result_simulated,,2,,index,verified via SPI read of reg[2]

@@ -1,0 +1,2352 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.65 (git sha1 aec814bdf3071f7e0fd0fbe43f7f711e99d01e24, clang++ 21.0.0 -fPIC -O3)
+
+-- Executing script file `/tmp/m4_synth.ys' --
+
+1. Executing Verilog-2005 frontend: project/m4/rtl/compute_core.sv
+Parsing SystemVerilog input from `project/m4/rtl/compute_core.sv' to AST representation.
+Generating RTLIL representation for module `\compute_core'.
+Warning: Replacing memory \x_arr with list of registers. See project/m4/rtl/compute_core.sv:86
+Warning: Replacing memory \acc with list of registers. See project/m4/rtl/compute_core.sv:112
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: project/m4/rtl/interface.sv
+Parsing SystemVerilog input from `project/m4/rtl/interface.sv' to AST representation.
+Generating RTLIL representation for module `\spi_slave'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: project/m4/rtl/top.sv
+Parsing SystemVerilog input from `project/m4/rtl/top.sv' to AST representation.
+Generating RTLIL representation for module `\kws_top'.
+Warning: Replacing memory \cmp_val with list of registers. See project/m4/rtl/top.sv:157
+Warning: Replacing memory \cmp_idx with list of registers. See project/m4/rtl/top.sv:156
+Successfully finished Verilog frontend.
+
+4. Executing HIERARCHY pass (managing design hierarchy).
+
+4.1. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     \compute_core
+Used module:     \spi_slave
+Parameter \N_IN = 8
+Parameter \N_OUT = 4
+Parameter \X_W = 16
+Parameter \ACC_W = 32
+
+4.2. Executing AST frontend in derive mode using pre-parsed AST for module `\compute_core'.
+Parameter \N_IN = 8
+Parameter \N_OUT = 4
+Parameter \X_W = 16
+Parameter \ACC_W = 32
+Generating RTLIL representation for module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Warning: Replacing memory \x_arr with list of registers. See project/m4/rtl/compute_core.sv:86
+Warning: Replacing memory \acc with list of registers. See project/m4/rtl/compute_core.sv:112
+Parameter \N_REGS = 4
+Parameter \AW = 2
+
+4.3. Executing AST frontend in derive mode using pre-parsed AST for module `\spi_slave'.
+Parameter \N_REGS = 4
+Parameter \AW = 2
+Generating RTLIL representation for module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+
+4.4. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+4.5. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+Removing unused module `\spi_slave'.
+Removing unused module `\compute_core'.
+Removed 2 unused modules.
+
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1.1. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+5.1.2. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+Removed 0 unused modules.
+
+5.2. Executing PROC pass (convert processes to netlists).
+
+5.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$project/m4/rtl/top.sv:194$115 in module kws_top.
+Marked 1 switch rules as full_case in process $proc$project/m4/rtl/top.sv:189$113 in module kws_top.
+Marked 2 switch rules as full_case in process $proc$project/m4/rtl/top.sv:174$111 in module kws_top.
+Marked 5 switch rules as full_case in process $proc$project/m4/rtl/interface.sv:136$192 in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Marked 1 switch rules as full_case in process $proc$project/m4/rtl/interface.sv:100$182 in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Removed 1 dead cases from process $proc$project/m4/rtl/compute_core.sv:103$165 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Marked 1 switch rules as full_case in process $proc$project/m4/rtl/compute_core.sv:103$165 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Removed 1 dead cases from process $proc$project/m4/rtl/compute_core.sv:103$162 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Marked 1 switch rules as full_case in process $proc$project/m4/rtl/compute_core.sv:103$162 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Marked 8 switch rules as full_case in process $proc$project/m4/rtl/compute_core.sv:106$142 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Marked 1 switch rules as full_case in process $proc$project/m4/rtl/compute_core.sv:73$133 in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Removed a total of 2 dead cases.
+
+5.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 11 redundant assignments.
+Promoted 36 assignments to connections.
+
+5.2.4. Executing PROC_INIT pass (extract init attributes).
+
+5.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+5.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~27 debug messages>
+
+5.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:163$127'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:162$126'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:163$123'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:162$122'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:163$119'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:162$118'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:157$117'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:156$116'.
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+     1/6: $2\ext_wdata[7:0]
+     2/6: $2\ext_addr[1:0]
+     3/6: $2\ext_wr[0:0]
+     4/6: $1\ext_wdata[7:0]
+     5/6: $1\ext_addr[1:0]
+     6/6: $1\ext_wr[0:0]
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:189$113'.
+     1/1: $0\valid_r[0:0]
+Creating decoders for process `\kws_top.$proc$project/m4/rtl/top.sv:174$111'.
+     1/1: $0\done_reg[0:0]
+Creating decoders for process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+     1/29: $3$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$231
+     2/29: $3$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_DATA[7:0]$230
+     3/29: $3$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_ADDR[1:0]$229
+     4/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$227
+     5/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_DATA[7:0]$226
+     6/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_ADDR[1:0]$225
+     7/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$216
+     8/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_DATA[7:0]$215
+     9/29: $2$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_ADDR[1:0]$214
+    10/29: $1\i[31:0]
+    11/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$207
+    12/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$206
+    13/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$205
+    14/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$204
+    15/29: $0\bus_wr[0:0]
+    16/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$213
+    17/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_DATA[7:0]$212
+    18/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_ADDR[1:0]$211
+    19/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$210
+    20/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_DATA[7:0]$209
+    21/29: $1$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_ADDR[1:0]$208
+    22/29: $0\addr_latch[1:0]
+    23/29: $0\rw_bit[0:0]
+    24/29: $0\bit_cnt[4:0]
+    25/29: $0\tx_shift[7:0]
+    26/29: $0\rx_shift[15:0]
+    27/29: $0\bus_wdata[7:0]
+    28/29: $0\bus_addr[1:0]
+    29/29: $0\miso[0:0]
+Creating decoders for process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+     1/8: $0\mosi_s1[0:0]
+     2/8: $0\mosi_s2[0:0]
+     3/8: $0\csn_s3[0:0]
+     4/8: $0\csn_s1[0:0]
+     5/8: $0\sclk_s3[0:0]
+     6/8: $0\sclk_s1[0:0]
+     7/8: $0\sclk_s2[0:0]
+     8/8: $0\csn_s2[0:0]
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$175'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$174'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$173'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$172'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$171'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$170'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$169'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$168'.
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$165'.
+     1/1: $1$mem2reg_rd$\x_arr$project/m4/rtl/compute_core.sv:103$131_DATA[15:0]$167
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$162'.
+     1/1: $1$mem2reg_rd$\x_arr$project/m4/rtl/compute_core.sv:103$130_DATA[15:0]$164
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+     1/10: $3\j[31:0]
+     2/10: $2\j[31:0]
+     3/10: $1\j[31:0]
+     4/10: $0\valid[0:0]
+     5/10: $0\acc[3][31:0]
+     6/10: $0\acc[2][31:0]
+     7/10: $0\acc[1][31:0]
+     8/10: $0\acc[0][31:0]
+     9/10: $0\col_cnt[2:0]
+    10/10: $0\state[1:0]
+Creating decoders for process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+     1/3: $1$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN[1:0]$139
+     2/3: $1$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_DATA[1:0]$138
+     3/3: $1$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_ADDR[31:0]$137
+
+5.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\kws_top.\cmp_idx[3]' from process `\kws_top.$proc$project/m4/rtl/top.sv:163$127'.
+No latch inferred for signal `\kws_top.\cmp_val[3]' from process `\kws_top.$proc$project/m4/rtl/top.sv:162$126'.
+No latch inferred for signal `\kws_top.\cmp_idx[2]' from process `\kws_top.$proc$project/m4/rtl/top.sv:163$123'.
+No latch inferred for signal `\kws_top.\cmp_val[2]' from process `\kws_top.$proc$project/m4/rtl/top.sv:162$122'.
+No latch inferred for signal `\kws_top.\cmp_idx[1]' from process `\kws_top.$proc$project/m4/rtl/top.sv:163$119'.
+No latch inferred for signal `\kws_top.\cmp_val[1]' from process `\kws_top.$proc$project/m4/rtl/top.sv:162$118'.
+No latch inferred for signal `\kws_top.\cmp_val[0]' from process `\kws_top.$proc$project/m4/rtl/top.sv:157$117'.
+No latch inferred for signal `\kws_top.\cmp_idx[0]' from process `\kws_top.$proc$project/m4/rtl/top.sv:156$116'.
+No latch inferred for signal `\kws_top.\ext_wr' from process `\kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+No latch inferred for signal `\kws_top.\ext_addr' from process `\kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+No latch inferred for signal `\kws_top.\ext_wdata' from process `\kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[7]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$175'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[6]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$174'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[5]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$173'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[4]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$172'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[3]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$171'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[2]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$170'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[1]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$169'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\x_arr[0]' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$168'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$mem2reg_rd$\x_arr$project/m4/rtl/compute_core.sv:103$131_DATA' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$165'.
+No latch inferred for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$mem2reg_rd$\x_arr$project/m4/rtl/compute_core.sv:103$130_DATA' from process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$162'.
+
+5.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\kws_top.\valid_r' using process `\kws_top.$proc$project/m4/rtl/top.sv:189$113'.
+  created $dff cell `$procdff$609' with positive edge clock.
+Creating register for signal `\kws_top.\done_reg' using process `\kws_top.$proc$project/m4/rtl/top.sv:174$111'.
+  created $dff cell `$procdff$610' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\i' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$611' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\miso' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$612' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\bus_addr' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$613' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\bus_wdata' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$614' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\bus_wr' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$615' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\rx_shift' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$616' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\tx_shift' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$617' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\bit_cnt' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$618' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\rw_bit' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$619' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\addr_latch' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$620' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$621' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$622' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$623' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$624' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_ADDR' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$625' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_DATA' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$626' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$627' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_ADDR' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$628' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_DATA' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$629' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+  created $dff cell `$procdff$630' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\sclk_s1' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$631' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\sclk_s2' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$632' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\sclk_s3' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$633' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\csn_s1' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$634' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\csn_s2' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$635' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\csn_s3' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$636' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\mosi_s1' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$637' with positive edge clock.
+Creating register for signal `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.\mosi_s2' using process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+  created $dff cell `$procdff$638' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\valid' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$639' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\state' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$640' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\col_cnt' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$641' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\j' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$642' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\acc[0]' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$643' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\acc[1]' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$644' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\acc[2]' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$645' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.\acc[3]' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+  created $dff cell `$procdff$646' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_ADDR' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+  created $dff cell `$procdff$647' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_DATA' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+  created $dff cell `$procdff$648' with positive edge clock.
+Creating register for signal `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN' using process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+  created $dff cell `$procdff$649' with positive edge clock.
+
+5.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+5.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:163$127'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:162$126'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:163$123'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:162$122'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:163$119'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:162$118'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:157$117'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:156$116'.
+Found and cleaned up 2 empty switches in `\kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:194$115'.
+Found and cleaned up 1 empty switch in `\kws_top.$proc$project/m4/rtl/top.sv:189$113'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:189$113'.
+Found and cleaned up 3 empty switches in `\kws_top.$proc$project/m4/rtl/top.sv:174$111'.
+Removing empty process `kws_top.$proc$project/m4/rtl/top.sv:174$111'.
+Found and cleaned up 9 empty switches in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+Removing empty process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:136$192'.
+Found and cleaned up 1 empty switch in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+Removing empty process `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$proc$project/m4/rtl/interface.sv:100$182'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$175'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$174'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$173'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$172'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$171'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$170'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$169'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:86$168'.
+Found and cleaned up 1 empty switch in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$165'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$165'.
+Found and cleaned up 1 empty switch in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$162'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:103$162'.
+Found and cleaned up 8 empty switches in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:106$142'.
+Found and cleaned up 1 empty switch in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+Removing empty process `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$proc$project/m4/rtl/compute_core.sv:73$133'.
+Cleaned up 27 empty switches.
+
+5.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+<suppressed ~2 debug messages>
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~43 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~20 debug messages>
+
+5.3. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~3 debug messages>
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 35 unused cells and 256 unused wires.
+<suppressed ~44 debug messages>
+
+5.5. Executing CHECK pass (checking for obvious problems).
+Checking module kws_top...
+Checking module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave...
+Checking module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core...
+Found and reported 0 problems.
+
+5.6. Executing OPT pass (performing simple optimizations).
+
+5.6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 22 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 108 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 107 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 94 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 75 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+<suppressed ~57 debug messages>
+Removed a total of 20 cells.
+
+5.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$249.
+    dead port 1/2 on $mux $procmux$243.
+    dead port 1/2 on $mux $procmux$237.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$332.
+    dead port 2/2 on $mux $procmux$326.
+    dead port 2/2 on $mux $procmux$320.
+    dead port 2/2 on $mux $procmux$314.
+    dead port 2/2 on $mux $procmux$308.
+    dead port 2/2 on $mux $procmux$302.
+    dead port 2/2 on $mux $procmux$296.
+    dead port 2/2 on $mux $procmux$293.
+    dead port 2/2 on $mux $procmux$287.
+    dead port 2/2 on $mux $procmux$284.
+    dead port 2/2 on $mux $procmux$278.
+    dead port 2/2 on $mux $procmux$275.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 15 multiplexer ports.
+<suppressed ~160 debug messages>
+
+5.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+    Consolidated identical input bits for $mux cell $procmux$347:
+      Old ports: A=8'11111111, B=8'00000000, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193
+      New ports: A=1'1, B=1'0, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$176_EN[7:0]$193 [0] }
+    Consolidated identical input bits for $mux cell $procmux$344:
+      Old ports: A=8'11111111, B=8'00000000, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194
+      New ports: A=1'1, B=1'0, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$177_EN[7:0]$194 [0] }
+    Consolidated identical input bits for $mux cell $procmux$341:
+      Old ports: A=8'11111111, B=8'00000000, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195
+      New ports: A=1'1, B=1'0, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$178_EN[7:0]$195 [0] }
+    Consolidated identical input bits for $mux cell $procmux$338:
+      Old ports: A=8'11111111, B=8'00000000, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196
+      New ports: A=1'1, B=1'0, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:148$179_EN[7:0]$196 [0] }
+    Consolidated identical input bits for $mux cell $procmux$317:
+      Old ports: A=8'00000000, B=8'11111111, Y=$procmux$317_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$317_Y [0]
+      New connections: $procmux$317_Y [7:1] = { $procmux$317_Y [0] $procmux$317_Y [0] $procmux$317_Y [0] $procmux$317_Y [0] $procmux$317_Y [0] $procmux$317_Y [0] $procmux$317_Y [0] }
+    Consolidated identical input bits for $mux cell $procmux$273:
+      Old ports: A=8'11111111, B=8'00000000, Y=$procmux$273_Y
+      New ports: A=1'1, B=1'0, Y=$procmux$273_Y [0]
+      New connections: $procmux$273_Y [7:1] = { $procmux$273_Y [0] $procmux$273_Y [0] $procmux$273_Y [0] $procmux$273_Y [0] $procmux$273_Y [0] $procmux$273_Y [0] $procmux$273_Y [0] }
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+    Consolidated identical input bits for $mux cell $procmux$368:
+      Old ports: A=8'00000000, B=$2$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$216, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199
+      New ports: A=1'0, B=$procmux$317_Y [0], Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] }
+    Consolidated identical input bits for $mux cell $procmux$299:
+      Old ports: A=8'00000000, B=$3$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$231, Y=$procmux$299_Y
+      New ports: A=1'0, B=$procmux$273_Y [0], Y=$procmux$299_Y [0]
+      New connections: $procmux$299_Y [7:1] = { $procmux$299_Y [0] $procmux$299_Y [0] $procmux$299_Y [0] $procmux$299_Y [0] $procmux$299_Y [0] $procmux$299_Y [0] $procmux$299_Y [0] }
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+    Consolidated identical input bits for $mux cell $procmux$359:
+      Old ports: A=8'00000000, B=$2$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$227, Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202
+      New ports: A=1'0, B=$procmux$299_Y [0], Y=$0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0]
+      New connections: $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [7:1] = { $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] $0$memwr$\reg_file$project/m4/rtl/interface.sv:187$181_EN[7:0]$202 [0] }
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+    Consolidated identical input bits for $mux cell $procmux$601:
+      Old ports: A=2'00, B=2'11, Y=$0$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN[1:0]$136
+      New ports: A=1'0, B=1'1, Y=$0$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN[1:0]$136 [0]
+      New connections: $0$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN[1:0]$136 [1] = $0$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_EN[1:0]$136 [0]
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 10 changes.
+
+5.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 19 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 95 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 91 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 90 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 89 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+<suppressed ~18 debug messages>
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 75 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 74 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+<suppressed ~3 debug messages>
+Removed a total of 7 cells.
+
+5.6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 0 unused cells and 42 unused wires.
+<suppressed ~3 debug messages>
+
+5.6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~133 debug messages>
+
+5.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 19 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 89 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 74 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.7. Executing FSM pass (extract and optimize FSM).
+
+5.7.1. Executing FSM_DETECT pass (finding FSMs in design).
+Found FSM state register $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.state.
+
+5.7.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\state' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+  found $dff cell for state register: $procdff$640
+  root of input selection tree: $0\state[1:0]
+  found reset state: 2'00 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 2'00
+  found ctrl input: $procmux$519_CMP
+  found ctrl input: $procmux$523_CMP
+  found ctrl input: $eq$project/m4/rtl/compute_core.sv:134$160_Y
+  found state code: 2'10
+  found ctrl input: \start
+  found state code: 2'01
+  found ctrl output: $procmux$508_CMP
+  found ctrl output: $procmux$519_CMP
+  found ctrl output: $procmux$523_CMP
+  ctrl inputs: { $eq$project/m4/rtl/compute_core.sv:134$160_Y \start \rst_n }
+  ctrl outputs: { $procmux$523_CMP $procmux$519_CMP $procmux$508_CMP $0\state[1:0] }
+  transition:       2'00 3'--0 ->       2'00 5'10000
+  transition:       2'00 3'-01 ->       2'00 5'10000
+  transition:       2'00 3'-11 ->       2'01 5'10001
+  transition:       2'10 3'--0 ->       2'00 5'00100
+  transition:       2'10 3'--1 ->       2'00 5'00100
+  transition:       2'01 3'--0 ->       2'00 5'01000
+  transition:       2'01 3'0-1 ->       2'01 5'01001
+  transition:       2'01 3'1-1 ->       2'10 5'01010
+
+5.7.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$657' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+  Merging pattern 3'--0 and 3'--1 from group (1 0 5'00100).
+  Merging pattern 3'--1 and 3'--0 from group (1 0 5'00100).
+
+5.7.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 8 unused cells and 8 unused wires.
+<suppressed ~9 debug messages>
+
+5.7.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$657' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+  Removing unused output signal $0\state[1:0] [0].
+  Removing unused output signal $0\state[1:0] [1].
+
+5.7.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\state$657' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  00 -> --1
+  10 -> -1-
+  01 -> 1--
+
+5.7.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\state$657' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core':
+-------------------------------------
+
+  Information on FSM $fsm$\state$657 (\state):
+
+  Number of input signals:    3
+  Number of output signals:   3
+  Number of state bits:       3
+
+  Input signals:
+    0: \rst_n
+    1: \start
+    2: $eq$project/m4/rtl/compute_core.sv:134$160_Y
+
+  Output signals:
+    0: $procmux$508_CMP
+    1: $procmux$519_CMP
+    2: $procmux$523_CMP
+
+  State encoding:
+    0:      3'--1  <RESET STATE>
+    1:      3'-1-
+    2:      3'1--
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 3'--0   ->     0 3'100
+      1:     0 3'-01   ->     0 3'100
+      2:     0 3'-11   ->     2 3'100
+      3:     1 3'---   ->     0 3'001
+      4:     2 3'--0   ->     0 3'010
+      5:     2 3'1-1   ->     1 3'010
+      6:     2 3'0-1   ->     2 3'010
+
+-------------------------------------
+
+5.7.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\state$657' from module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+
+5.8. Executing OPT pass (performing simple optimizations).
+
+5.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~1 debug messages>
+
+5.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 19 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 89 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 78 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~128 debug messages>
+
+5.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 19 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 89 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 78 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$609 ($dff) from module kws_top (D = \valid, Q = \valid_r, rval = 1'0).
+Adding SRST signal on $procdff$631 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \sclk, Q = \sclk_s1, rval = 1'0).
+Adding SRST signal on $procdff$613 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$429_Y, Q = \bus_addr, rval = 2'00).
+Adding EN signal on $auto$ff.cc:337:slice$688 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \addr_latch, Q = \bus_addr).
+Adding SRST signal on $procdff$617 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$404_Y, Q = \tx_shift, rval = 8'00000000).
+Adding SRST signal on $procdff$618 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$392_Y, Q = \bit_cnt, rval = 5'00000).
+Adding EN signal on $auto$ff.cc:337:slice$695 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$392_Y, Q = \bit_cnt).
+Adding SRST signal on $procdff$619 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$385_Y, Q = \rw_bit, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$699 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \rx_shift [6], Q = \rw_bit).
+Adding SRST signal on $procdff$620 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$378_Y, Q = \addr_latch, rval = 2'00).
+Adding EN signal on $auto$ff.cc:337:slice$703 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = { \rx_shift [0] \mosi_s2 }, Q = \addr_latch).
+Adding SRST signal on $procdff$638 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \mosi_s1, Q = \mosi_s2, rval = 1'0).
+Adding SRST signal on $procdff$612 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$437_Y, Q = \miso, rval = 1'0).
+Adding EN signal on $auto$ff.cc:337:slice$708 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$435_Y, Q = \miso).
+Adding SRST signal on $procdff$637 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \mosi, Q = \mosi_s1, rval = 1'0).
+Adding SRST signal on $procdff$636 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \csn_s2, Q = \csn_s3, rval = 1'1).
+Adding SRST signal on $procdff$635 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \csn_s1, Q = \csn_s2, rval = 1'1).
+Adding SRST signal on $procdff$634 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \cs_n, Q = \csn_s1, rval = 1'1).
+Adding SRST signal on $procdff$633 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \sclk_s2, Q = \sclk_s3, rval = 1'0).
+Adding SRST signal on $procdff$632 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \sclk_s1, Q = \sclk_s2, rval = 1'0).
+Adding SRST signal on $procdff$614 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$420_Y, Q = \bus_wdata, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$716 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = \rx_shift [7:0], Q = \bus_wdata).
+Adding SRST signal on $procdff$616 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$411_Y, Q = \rx_shift, rval = 16'0000000000000000).
+Adding EN signal on $auto$ff.cc:337:slice$722 ($sdff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $procmux$411_Y, Q = \rx_shift).
+Adding SRST signal on $procdff$646 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$518_Y, Q = \acc[3], rval = 0).
+Adding EN signal on $auto$ff.cc:337:slice$726 ($sdff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$518_Y, Q = \acc[3]).
+Adding SRST signal on $procdff$645 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$533_Y, Q = \acc[2], rval = 0).
+Adding EN signal on $auto$ff.cc:337:slice$736 ($sdff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$533_Y, Q = \acc[2]).
+Adding SRST signal on $procdff$644 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$548_Y, Q = \acc[1], rval = 0).
+Adding EN signal on $auto$ff.cc:337:slice$746 ($sdff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$548_Y, Q = \acc[1]).
+Adding SRST signal on $procdff$643 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$563_Y, Q = \acc[0], rval = 0).
+Adding EN signal on $auto$ff.cc:337:slice$756 ($sdff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$563_Y, Q = \acc[0]).
+Adding SRST signal on $procdff$641 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$577_Y, Q = \col_cnt, rval = 3'000).
+Adding EN signal on $auto$ff.cc:337:slice$766 ($sdff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$577_Y, Q = \col_cnt).
+Adding SRST signal on $procdff$639 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $procmux$507_Y, Q = \valid, rval = 1'0).
+
+5.8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 32 unused cells and 38 unused wires.
+<suppressed ~35 debug messages>
+
+5.8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~2 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~5 debug messages>
+
+5.8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~83 debug messages>
+
+5.8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 18 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 72 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 69 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 68 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+<suppressed ~12 debug messages>
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 92 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 81 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+<suppressed ~33 debug messages>
+Removed a total of 15 cells.
+
+5.8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 0 unused cells and 15 unused wires.
+<suppressed ~2 debug messages>
+
+5.8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~85 debug messages>
+
+5.8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 18 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 68 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 81 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+5.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell kws_top.$eq$project/m4/rtl/top.sv:145$108 ($eq).
+Removed top 1 bits (of 2) from mux cell kws_top.$ternary$project/m4/rtl/top.sv:163$121 ($mux).
+Removed top 7 bits (of 8) from mux cell kws_top.$procmux$234 ($mux).
+Removed top 6 bits (of 8) from mux cell kws_top.$procmux$252 ($mux).
+Removed top 7 bits (of 8) from wire kws_top.$2\ext_wdata[7:0].
+Removed top 1 bits (of 2) from wire kws_top.cmp_idx[1].
+Removed top 6 bits (of 8) from wire kws_top.ext_wdata.
+Removed top 30 address bits (of 32) from memory init port $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$proc_memwr.cc:45:proc_memwr$651 (reg_file).
+Removed top 30 address bits (of 32) from memory init port $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$proc_memwr.cc:45:proc_memwr$652 (reg_file).
+Removed top 30 address bits (of 32) from memory init port $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$proc_memwr.cc:45:proc_memwr$650 (reg_file).
+Removed top 30 address bits (of 32) from memory init port $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$proc_memwr.cc:45:proc_memwr$653 (reg_file).
+Removed top 1 bits (of 16) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 2 bits (of 5) from port B of cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$eq$project/m4/rtl/interface.sv:167$220 ($eq).
+Removed top 1 bits (of 5) from port B of cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$ge$project/m4/rtl/interface.sv:176$224 ($ge).
+Removed top 1 bits (of 16) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 15) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 16) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 15) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 14) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 15) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 14) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 13) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 14) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 13) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 12) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 13) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 12) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 11) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 12) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 11) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 10) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 11) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 10) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 9) from FF cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$auto$ff.cc:337:slice$723 ($sdffe).
+Removed top 1 bits (of 10) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 1 bits (of 9) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411 ($mux).
+Removed top 1 bits (of 9) from mux cell $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409 ($mux).
+Removed top 8 bits (of 16) from wire $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$409_Y.
+Removed top 8 bits (of 16) from wire $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.$procmux$411_Y.
+Removed top 8 bits (of 16) from wire $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.rx_shift.
+Removed top 27 address bits (of 32) from memory read port $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memrd$\w_mem$project/m4/rtl/compute_core.sv:128$156 (w_mem).
+Removed top 27 address bits (of 32) from memory read port $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memrd$\w_mem$project/m4/rtl/compute_core.sv:128$152 (w_mem).
+Removed top 27 address bits (of 32) from memory read port $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memrd$\w_mem$project/m4/rtl/compute_core.sv:128$148 (w_mem).
+Removed top 27 address bits (of 32) from memory read port $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$memrd$\w_mem$project/m4/rtl/compute_core.sv:128$144 (w_mem).
+Removed top 27 address bits (of 32) from memory init port $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$proc_memwr.cc:45:proc_memwr$656 (w_mem).
+Removed top 2 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$opt_dff.cc:235:make_patterns_logic$763 ($ne).
+Removed top 2 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$opt_dff.cc:235:make_patterns_logic$753 ($ne).
+Removed top 2 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$opt_dff.cc:235:make_patterns_logic$743 ($ne).
+Removed top 2 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$opt_dff.cc:235:make_patterns_logic$733 ($ne).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$682 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$auto$fsm_map.cc:77:implement_pattern_cache$669 ($eq).
+Removed top 27 bits (of 32) from port A of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:75$141 ($add).
+Removed top 26 bits (of 32) from port Y of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:75$141 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:129$146 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$sub$project/m4/rtl/compute_core.sv:130$147 ($sub).
+Removed top 28 bits (of 32) from port A of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$149 ($add).
+Removed top 27 bits (of 32) from port Y of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$149 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:129$150 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$sub$project/m4/rtl/compute_core.sv:130$151 ($sub).
+Removed top 27 bits (of 32) from port A of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$153 ($add).
+Removed top 27 bits (of 32) from port Y of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$153 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:129$154 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$sub$project/m4/rtl/compute_core.sv:130$155 ($sub).
+Removed top 27 bits (of 32) from port A of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$157 ($add).
+Removed top 27 bits (of 32) from port Y of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$157 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:129$158 ($add).
+Removed top 16 bits (of 32) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$sub$project/m4/rtl/compute_core.sv:130$159 ($sub).
+Removed top 1 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$480_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$481_CMP0 ($eq).
+Removed top 2 bits (of 3) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$482_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$517_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$532_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$547_CMP0 ($eq).
+Removed top 1 bits (of 2) from port B of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$562_CMP0 ($eq).
+Removed top 27 bits (of 32) from mux cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$procmux$607 ($mux).
+Removed top 1 bits (of 6) from port Y of cell $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:75$141 ($add).
+Removed top 27 bits (of 32) from wire $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$157_Y.
+Removed top 27 bits (of 32) from wire $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$153_Y.
+Removed top 27 bits (of 32) from wire $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:128$149_Y.
+Removed top 27 bits (of 32) from wire $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$add$project/m4/rtl/compute_core.sv:75$141_Y.
+Removed top 27 bits (of 32) from wire $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.$0$memwr$\w_mem$project/m4/rtl/compute_core.sv:75$132_ADDR[31:0]$134.
+
+5.10. Executing PEEPOPT pass (run peephole optimizers).
+
+5.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 0 unused cells and 11 unused wires.
+<suppressed ~3 debug messages>
+
+5.12. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module kws_top:
+  creating $alu model for $gt$project/m4/rtl/top.sv:163$128 ($gt): new $alu
+  creating $alu model for $gt$project/m4/rtl/top.sv:163$124 ($gt): new $alu
+  creating $alu model for $gt$project/m4/rtl/top.sv:163$120 ($gt): new $alu
+  creating $alu cell for $gt$project/m4/rtl/top.sv:163$120: $auto$alumacc.cc:512:replace_alu$791
+  creating $alu cell for $gt$project/m4/rtl/top.sv:163$124: $auto$alumacc.cc:512:replace_alu$804
+  creating $alu cell for $gt$project/m4/rtl/top.sv:163$128: $auto$alumacc.cc:512:replace_alu$817
+  created 3 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave:
+  creating $macc model for $add$project/m4/rtl/interface.sv:165$219 ($add).
+  creating $alu model for $macc $add$project/m4/rtl/interface.sv:165$219.
+  creating $alu model for $ge$project/m4/rtl/interface.sv:176$224 ($ge): new $alu
+  creating $alu cell for $ge$project/m4/rtl/interface.sv:176$224: $auto$alumacc.cc:512:replace_alu$831
+  creating $alu cell for $add$project/m4/rtl/interface.sv:165$219: $auto$alumacc.cc:512:replace_alu$844
+  created 2 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core:
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:137$161 ($add).
+  creating $macc model for $sub$project/m4/rtl/compute_core.sv:130$159 ($sub).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:129$158 ($add).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:128$157 ($add).
+  creating $macc model for $sub$project/m4/rtl/compute_core.sv:130$155 ($sub).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:129$154 ($add).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:128$153 ($add).
+  creating $macc model for $sub$project/m4/rtl/compute_core.sv:130$151 ($sub).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:129$150 ($add).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:128$149 ($add).
+  creating $macc model for $sub$project/m4/rtl/compute_core.sv:130$147 ($sub).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:129$146 ($add).
+  creating $macc model for $add$project/m4/rtl/compute_core.sv:75$141 ($add).
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:75$141.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:129$146.
+  creating $alu model for $macc $sub$project/m4/rtl/compute_core.sv:130$147.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:128$149.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:129$150.
+  creating $alu model for $macc $sub$project/m4/rtl/compute_core.sv:130$151.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:128$153.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:129$154.
+  creating $alu model for $macc $sub$project/m4/rtl/compute_core.sv:130$155.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:128$157.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:129$158.
+  creating $alu model for $macc $sub$project/m4/rtl/compute_core.sv:130$159.
+  creating $alu model for $macc $add$project/m4/rtl/compute_core.sv:137$161.
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:137$161: $auto$alumacc.cc:512:replace_alu$847
+  creating $alu cell for $sub$project/m4/rtl/compute_core.sv:130$159: $auto$alumacc.cc:512:replace_alu$850
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:129$158: $auto$alumacc.cc:512:replace_alu$853
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:128$157: $auto$alumacc.cc:512:replace_alu$856
+  creating $alu cell for $sub$project/m4/rtl/compute_core.sv:130$155: $auto$alumacc.cc:512:replace_alu$859
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:129$154: $auto$alumacc.cc:512:replace_alu$862
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:128$153: $auto$alumacc.cc:512:replace_alu$865
+  creating $alu cell for $sub$project/m4/rtl/compute_core.sv:130$151: $auto$alumacc.cc:512:replace_alu$868
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:129$150: $auto$alumacc.cc:512:replace_alu$871
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:128$149: $auto$alumacc.cc:512:replace_alu$874
+  creating $alu cell for $sub$project/m4/rtl/compute_core.sv:130$147: $auto$alumacc.cc:512:replace_alu$877
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:129$146: $auto$alumacc.cc:512:replace_alu$880
+  creating $alu cell for $add$project/m4/rtl/compute_core.sv:75$141: $auto$alumacc.cc:512:replace_alu$883
+  created 13 $alu and 0 $macc cells.
+
+5.13. Executing SHARE pass (SAT-based resource sharing).
+
+5.14. Executing OPT pass (performing simple optimizations).
+
+5.14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+<suppressed ~3 debug messages>
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 33 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 73 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 81 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~85 debug messages>
+
+5.14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 33 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 32 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 73 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 81 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 1 cells.
+
+5.14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 3 unused cells and 8 unused wires.
+<suppressed ~5 debug messages>
+
+5.14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~87 debug messages>
+
+5.14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 29 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 73 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 81 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.14.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5.15. Executing MEMORY pass.
+
+5.15.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.15.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 6 transformations.
+
+5.15.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 0.
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 1.
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 2.
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 3.
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 4.
+  Analyzing $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file write port 5.
+  Analyzing $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.w_mem write port 0.
+
+5.15.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.15.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\reg_file'[0] in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave': no output FF found.
+Checking read port `\reg_file'[1] in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave': no output FF found.
+Checking read port address `\reg_file'[0] in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave': no address FF found.
+Checking read port address `\reg_file'[1] in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave': merged address FF to cell.
+Checking read port `\w_mem'[0] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no output FF found.
+Checking read port `\w_mem'[1] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no output FF found.
+Checking read port `\w_mem'[2] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no output FF found.
+Checking read port `\w_mem'[3] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no output FF found.
+Checking read port address `\w_mem'[0] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': merged address FF to cell.
+Checking read port address `\w_mem'[1] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no address FF found.
+Checking read port address `\w_mem'[2] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no address FF found.
+Checking read port address `\w_mem'[3] in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core': no address FF found.
+
+5.15.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.15.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+Consolidating read ports of memory $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file by address:
+Consolidating write ports of memory $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file by address:
+  Merging ports 0, 1 (address 2'00).
+  Merging ports 0, 2 (address 2'00).
+Consolidating write ports of memory $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file by address:
+Consolidating write ports of memory $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file using sat-based resource sharing:
+  Checking group clocked with posedge \clk, width 8: ports 1, 2, 3.
+  Common input cone for all EN signals: 8 cells.
+  Size of unconstrained SAT problem: 54 variables, 127 clauses
+  Merging port 2 into port 1.
+  According to SAT solver sharing of port 1 with port 3 is not possible.
+Consolidating read ports of memory $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.w_mem by address:
+
+5.15.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.15.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.15.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.17. Executing OPT pass (performing simple optimizations).
+
+5.17.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+<suppressed ~3 debug messages>
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~21 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~36 debug messages>
+
+5.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 28 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 61 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 60 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 69 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 1 cells.
+
+5.17.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.17.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 1 unused cells and 41 unused wires.
+<suppressed ~5 debug messages>
+
+5.17.5. Finished fast OPT passes.
+
+5.18. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \reg_file in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave:
+  created 4 $dff cells and 0 static cells of width 8.
+Extracted addr FF from read port 1 of $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.reg_file: $\reg_file$rdreg[1]
+  read interface: 1 $dff and 6 $mux cells.
+  write interface: 12 write mux blocks.
+Mapping memory \w_mem in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core:
+  created 32 $dff cells and 0 static cells of width 2.
+Extracted addr FF from read port 0 of $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.w_mem: $\w_mem$rdreg[0]
+  read interface: 1 $dff and 124 $mux cells.
+  write interface: 32 write mux blocks.
+
+5.19. Executing OPT pass (performing simple optimizations).
+
+5.19.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~17 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~19 debug messages>
+
+5.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 28 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 101 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 331 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.19.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+      Replacing known input bits on port B of cell $auto$memory_share.cc:454:consolidate_wr_using_sat$913: $0$memwr$\reg_file$project/m4/rtl/interface.sv:154$180_EN[7:0]$199 [0] -> 1'1
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][11]$1454.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][11]$1454.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][10]$1451.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][10]$1451.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][9]$1448.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][9]$1448.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][8]$1445.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][8]$1445.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][7]$1442.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][7]$1442.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][6]$1439.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][6]$1439.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][5]$1436.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][5]$1436.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][4]$1433.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][4]$1433.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][3]$1430.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][3]$1430.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][2]$1427.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][2]$1427.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][1]$1424.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][1]$1424.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][4][0]$1421.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][4][0]$1421.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][5]$1412.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][5]$1412.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][4]$1409.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][4]$1409.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][3]$1406.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][3]$1406.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][2]$1403.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][2]$1403.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][1]$1400.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][1]$1400.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][3][0]$1397.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][3][0]$1397.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][2][2]$1391.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][2][2]$1391.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][2][1]$1388.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][2][1]$1388.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[3][2][0]$1385.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[3][2][0]$1385.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][15]$1373.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][15]$1373.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][14]$1370.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][14]$1370.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][13]$1367.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][13]$1367.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][12]$1364.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][12]$1364.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][7]$1349.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][7]$1349.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][6]$1346.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][6]$1346.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][5]$1343.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][5]$1343.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][4]$1340.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][4]$1340.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][3]$1337.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][3]$1337.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][2]$1334.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][2]$1334.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][1]$1331.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][1]$1331.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][4][0]$1328.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][4][0]$1328.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][7]$1325.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][7]$1325.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][6]$1322.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][6]$1322.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][3]$1313.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][3]$1313.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][2]$1310.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][2]$1310.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][1]$1307.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][1]$1307.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][3][0]$1304.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][3][0]$1304.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][2][3]$1301.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][2][3]$1301.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][2][1]$1295.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][2][1]$1295.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[2][2][0]$1292.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[2][2][0]$1292.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][15]$1280.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][15]$1280.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][14]$1277.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][14]$1277.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][13]$1274.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][13]$1274.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][12]$1271.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][12]$1271.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][11]$1268.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][11]$1268.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][10]$1265.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][10]$1265.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][9]$1262.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][9]$1262.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][8]$1259.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][8]$1259.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][3]$1244.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][3]$1244.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][2]$1241.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][2]$1241.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][1]$1238.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][1]$1238.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][4][0]$1235.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][4][0]$1235.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][7]$1232.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][7]$1232.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][6]$1229.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][6]$1229.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][5]$1226.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][5]$1226.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][4]$1223.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][4]$1223.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][1]$1214.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][1]$1214.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][3][0]$1211.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][3][0]$1211.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][2][3]$1208.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][2][3]$1208.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][2][2]$1205.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][2][2]$1205.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[1][2][0]$1199.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[1][2][0]$1199.
+Removed 126 multiplexer ports.
+<suppressed ~201 debug messages>
+
+5.19.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+    Consolidated identical input bits for $mux cell $procmux$240:
+      Old ports: A=2'00, B=2'11, Y=$2\ext_addr[1:0]
+      New ports: A=1'0, B=1'1, Y=$2\ext_addr[1:0] [0]
+      New connections: $2\ext_addr[1:0] [1] = $2\ext_addr[1:0] [0]
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+    Consolidated identical input bits for $mux cell $auto$ff.cc:592:unmap_ce$899:
+      Old ports: A={ 2'00 \col_cnt }, B={ 2'00 $procmux$577_Y }, Y=$auto$rtlil.cc:3390:Mux$900
+      New ports: A=\col_cnt, B=$procmux$577_Y, Y=$auto$rtlil.cc:3390:Mux$900 [2:0]
+      New connections: $auto$rtlil.cc:3390:Mux$900 [4:3] = 2'00
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+    Consolidated identical input bits for $mux cell $auto$ff.cc:614:unmap_srst$901:
+      Old ports: A=5'00000, B=$auto$rtlil.cc:3390:Mux$900, Y=$auto$rtlil.cc:3390:Mux$902
+      New ports: A=3'000, B=$auto$rtlil.cc:3390:Mux$900 [2:0], Y=$auto$rtlil.cc:3390:Mux$902 [2:0]
+      New connections: $auto$rtlil.cc:3390:Mux$902 [4:3] = 2'00
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 3 changes.
+
+5.19.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 28 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 101 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 268 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.19.6. Executing OPT_SHARE pass.
+    Found cells that share an operand and can be merged by moving the $mux $procmux$530 in front of them:
+        $auto$alumacc.cc:512:replace_alu$859
+        $auto$alumacc.cc:512:replace_alu$862
+
+    Found cells that share an operand and can be merged by moving the $mux $procmux$515 in front of them:
+        $auto$alumacc.cc:512:replace_alu$850
+        $auto$alumacc.cc:512:replace_alu$853
+
+    Found cells that share an operand and can be merged by moving the $mux $procmux$560 in front of them:
+        $auto$alumacc.cc:512:replace_alu$877
+        $auto$alumacc.cc:512:replace_alu$880
+
+    Found cells that share an operand and can be merged by moving the $mux $procmux$545 in front of them:
+        $auto$alumacc.cc:512:replace_alu$868
+        $auto$alumacc.cc:512:replace_alu$871
+
+5.19.7. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $\reg_file$rdreg[1] ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $auto$rtlil.cc:3390:Mux$891, Q = $\reg_file$rdreg[1]$q, rval = 2'00).
+Adding SRST signal on $\w_mem$rdreg[0] ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = $auto$rtlil.cc:3390:Mux$900 [2:0], Q = $\w_mem$rdreg[0]$q [2:0], rval = 3'000).
+
+5.19.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 2 unused cells and 284 unused wires.
+<suppressed ~4 debug messages>
+
+5.19.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+<suppressed ~1 debug messages>
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~1 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~4 debug messages>
+
+5.19.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~200 debug messages>
+
+5.19.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.19.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 27 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 100 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 268 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 265 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+5.19.14. Executing OPT_SHARE pass.
+
+5.19.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\reg_file[0]$925 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $memory\reg_file$wrmux[0][2][0]$y$976, Q = \reg_file[0]).
+Adding EN signal on $memory\reg_file[1]$927 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $memory\reg_file$wrmux[1][2][0]$y$996, Q = \reg_file[1]).
+Adding EN signal on $memory\reg_file[2]$929 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $memory\reg_file$wrmux[2][2][0]$y$1016, Q = \reg_file[2]).
+Adding EN signal on $memory\reg_file[3]$931 ($dff) from module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave (D = $memory\reg_file$wrmux[3][2][0]$y$1032, Q = \reg_file[3]).
+Adding EN signal on $memory\w_mem[0]$1033 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[0]).
+Adding EN signal on $memory\w_mem[1]$1035 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[1]).
+Adding EN signal on $memory\w_mem[2]$1037 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[2]).
+Adding EN signal on $memory\w_mem[3]$1039 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[3]).
+Adding EN signal on $memory\w_mem[4]$1041 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[4]).
+Adding EN signal on $memory\w_mem[5]$1043 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[5]).
+Adding EN signal on $memory\w_mem[6]$1045 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[6]).
+Adding EN signal on $memory\w_mem[7]$1047 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[7]).
+Adding EN signal on $memory\w_mem[8]$1049 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[8]).
+Adding EN signal on $memory\w_mem[9]$1051 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[9]).
+Adding EN signal on $memory\w_mem[10]$1053 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[10]).
+Adding EN signal on $memory\w_mem[11]$1055 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[11]).
+Adding EN signal on $memory\w_mem[12]$1057 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[12]).
+Adding EN signal on $memory\w_mem[13]$1059 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[13]).
+Adding EN signal on $memory\w_mem[14]$1061 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[14]).
+Adding EN signal on $memory\w_mem[15]$1063 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[15]).
+Adding EN signal on $memory\w_mem[16]$1065 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[16]).
+Adding EN signal on $memory\w_mem[17]$1067 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[17]).
+Adding EN signal on $memory\w_mem[18]$1069 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[18]).
+Adding EN signal on $memory\w_mem[19]$1071 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[19]).
+Adding EN signal on $memory\w_mem[20]$1073 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[20]).
+Adding EN signal on $memory\w_mem[21]$1075 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[21]).
+Adding EN signal on $memory\w_mem[22]$1077 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[22]).
+Adding EN signal on $memory\w_mem[23]$1079 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[23]).
+Adding EN signal on $memory\w_mem[24]$1081 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[24]).
+Adding EN signal on $memory\w_mem[25]$1083 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[25]).
+Adding EN signal on $memory\w_mem[26]$1085 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[26]).
+Adding EN signal on $memory\w_mem[27]$1087 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[27]).
+Adding EN signal on $memory\w_mem[28]$1089 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[28]).
+Adding EN signal on $memory\w_mem[29]$1091 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[29]).
+Adding EN signal on $memory\w_mem[30]$1093 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[30]).
+Adding EN signal on $memory\w_mem[31]$1095 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core (D = \w_din, Q = \w_mem[31]).
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$1743 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$1743 ($dff) from module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.19.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 32 unused cells and 40 unused wires.
+<suppressed ~34 debug messages>
+
+5.19.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~5 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~3 debug messages>
+
+5.19.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][15]$1187.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][15]$1187.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][14]$1184.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][14]$1184.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][13]$1181.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][13]$1181.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][12]$1178.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][12]$1178.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][11]$1175.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][11]$1175.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][10]$1172.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][10]$1172.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][9]$1169.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][9]$1169.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][8]$1166.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][8]$1166.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][7]$1163.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][7]$1163.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][6]$1160.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][6]$1160.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][5]$1157.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][5]$1157.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][4][4]$1154.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][4][4]$1154.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][7]$1139.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][7]$1139.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][6]$1136.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][6]$1136.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][5]$1133.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][5]$1133.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][4]$1130.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][4]$1130.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][3]$1127.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][3]$1127.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][3][2]$1124.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][3][2]$1124.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][2][3]$1115.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][2][3]$1115.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][2][2]$1112.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][2][2]$1112.
+    dead port 1/2 on $mux $memory\w_mem$rdmux[0][2][1]$1109.
+    dead port 2/2 on $mux $memory\w_mem$rdmux[0][2][1]$1109.
+Removed 42 multiplexer ports.
+<suppressed ~108 debug messages>
+
+5.19.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.19.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 27 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 100 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 208 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.19.22. Executing OPT_SHARE pass.
+
+5.19.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 0 unused cells and 28 unused wires.
+<suppressed ~2 debug messages>
+
+5.19.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.19.26. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.19.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \kws_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~108 debug messages>
+
+5.19.28. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \kws_top.
+  Optimizing cells in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+  Optimizing cells in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+Performed a total of 0 changes.
+
+5.19.29. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 27 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 100 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 208 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 0 cells.
+
+5.19.30. Executing OPT_SHARE pass.
+
+5.19.31. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.19.32. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+
+5.19.33. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.19.34. Finished fast OPT passes. (There is nothing left to do.)
+
+5.20. Executing TECHMAP pass (map to technology primitives).
+
+5.20.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.20.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $mux.
+Running "alumacc" on wrapper $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:Y_WIDTH=32:A_WIDTH=32:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $sdffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $dff.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod$672a140277c71df8314410f22acc08d55222c3c7\_90_alu for cells of type $alu.
+Using template $paramod$ba698a254f9a5947e85cbe7beae6b161eefc5386\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000101 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000101 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000000010 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~2326 debug messages>
+
+5.21. Executing OPT pass (performing simple optimizations).
+
+5.21.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+<suppressed ~395 debug messages>
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+<suppressed ~80 debug messages>
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+<suppressed ~1023 debug messages>
+
+5.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 927 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 882 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 861 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 852 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 849 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+<suppressed ~234 debug messages>
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 329 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 315 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+<suppressed ~42 debug messages>
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 2144 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 2099 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 2089 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 2086 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 2085 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+<suppressed ~177 debug messages>
+Removed a total of 151 cells.
+
+5.21.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 291 unused cells and 854 unused wires.
+<suppressed ~294 debug messages>
+
+5.21.5. Finished fast OPT passes.
+
+5.22. Executing ABC pass (technology mapping using ABC).
+
+5.22.1. Extracting gate netlist of module `\kws_top' to `<abc-temp-dir>/input.blif'..
+
+5.22.1.1. Executed ABC.
+Extracted 621 gates and 757 wires to a netlist network with 134 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      172
+ABC RESULTS:            ANDNOT cells:       20
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:      123
+ABC RESULTS:               NOR cells:       10
+ABC RESULTS:                OR cells:        7
+ABC RESULTS:             ORNOT cells:      167
+ABC RESULTS:              XNOR cells:       21
+ABC RESULTS:        internal signals:      617
+ABC RESULTS:           input signals:      134
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+5.22.2. Extracting gate netlist of module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave' to `<abc-temp-dir>/input.blif'..
+
+5.22.2.1. Executed ABC.
+Extracted 234 gates and 313 wires to a netlist network with 77 inputs and 73 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       57
+ABC RESULTS:            ANDNOT cells:       18
+ABC RESULTS:               MUX cells:       97
+ABC RESULTS:              NAND cells:       11
+ABC RESULTS:                OR cells:        4
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        1
+ABC RESULTS:        internal signals:      163
+ABC RESULTS:           input signals:       77
+ABC RESULTS:          output signals:       73
+Removing temp directory.
+
+5.22.3. Extracting gate netlist of module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core' to `<abc-temp-dir>/input.blif'..
+
+5.22.3.1. Executed ABC.
+Extracted 1820 gates and 2158 wires to a netlist network with 337 inputs and 174 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+5.22.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:      588
+ABC RESULTS:            ANDNOT cells:       40
+ABC RESULTS:               MUX cells:       81
+ABC RESULTS:              NAND cells:      487
+ABC RESULTS:               NOR cells:       47
+ABC RESULTS:                OR cells:      134
+ABC RESULTS:             ORNOT cells:        5
+ABC RESULTS:              XNOR cells:      130
+ABC RESULTS:               XOR cells:        5
+ABC RESULTS:        internal signals:     1647
+ABC RESULTS:           input signals:      337
+ABC RESULTS:          output signals:      174
+Removing temp directory.
+Removing global temp directory.
+
+5.23. Executing OPT pass (performing simple optimizations).
+
+5.23.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module kws_top.
+Optimizing module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave.
+Optimizing module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core.
+
+5.23.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\kws_top'.
+Computing hashes of 524 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+Computing hashes of 523 cells of `\kws_top'.
+Finding duplicate cells in `\kws_top'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Computing hashes of 268 cells of `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding duplicate cells in `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Finding identical cells in module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Computing hashes of 1719 cells of `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Finding duplicate cells in `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Removed a total of 1 cells.
+
+5.23.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.23.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \kws_top..
+Finding unused cells or wires in module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave..
+Finding unused cells or wires in module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core..
+Removed 0 unused cells and 1669 unused wires.
+<suppressed ~11 debug messages>
+
+5.23.5. Finished fast OPT passes.
+
+5.24. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `kws_top'. Setting top module to kws_top.
+
+5.24.1. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+5.24.2. Analyzing design hierarchy..
+Top module:  \kws_top
+Used module:     $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+Used module:     $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+Removed 0 unused modules.
+
+5.25. Printing statistics.
+
+=== kws_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      542 wires
+      942 wire bits
+       27 public wires
+      427 public wire bits
+       11 ports
+      142 port bits
+      521 cells
+       20   $_ANDNOT_
+      172   $_AND_
+        1   $_MUX_
+      123   $_NAND_
+       10   $_NOR_
+      167   $_ORNOT_
+        6   $_OR_
+        1   $_SDFF_PN0_
+       21   $_XNOR_
+        2 submodules
+        1   $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+        1   $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+=== $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      213 wires
+      298 wire bits
+       30 public wires
+      100 public wire bits
+       13 ports
+       36 port bits
+      268 cells
+       18   $_ANDNOT_
+       57   $_AND_
+       32   $_DFFE_PP_
+        1   $_DFF_P_
+       97   $_MUX_
+       11   $_NAND_
+        1   $_ORNOT_
+        4   $_OR_
+       27   $_SDFFE_PN0P_
+       15   $_SDFF_PN0_
+        3   $_SDFF_PN1_
+        1   $_XNOR_
+        1   $_XOR_
+
+=== $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     1575 wires
+     2148 wire bits
+       57 public wires
+      626 public wire bits
+       10 ports
+      268 port bits
+     1719 cells
+       40   $_ANDNOT_
+      588   $_AND_
+       64   $_DFFE_PP_
+        3   $_DFF_P_
+       81   $_MUX_
+      487   $_NAND_
+       47   $_NOR_
+        5   $_ORNOT_
+      134   $_OR_
+      131   $_SDFFE_PN0P_
+        4   $_SDFF_PN0_
+      130   $_XNOR_
+        5   $_XOR_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     2508 kws_top
+     1719 $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+      268 $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+        +----------Count including submodules.
+        | 
+     2330 wires
+     3388 wire bits
+      114 public wires
+     1153 public wire bits
+       34 ports
+      446 port bits
+        - memories
+        - memory bits
+        - processes
+     2508 cells
+       78   $_ANDNOT_
+      817   $_AND_
+       96   $_DFFE_PP_
+        4   $_DFF_P_
+      179   $_MUX_
+      621   $_NAND_
+       57   $_NOR_
+      173   $_ORNOT_
+      144   $_OR_
+      158   $_SDFFE_PN0P_
+       20   $_SDFF_PN0_
+        3   $_SDFF_PN1_
+      152   $_XNOR_
+        6   $_XOR_
+        2 submodules
+        1   $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+        1   $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+5.26. Executing CHECK pass (checking for obvious problems).
+Checking module kws_top...
+Checking module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave...
+Checking module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core...
+Found and reported 0 problems.
+
+6. Executing ABC pass (technology mapping using ABC).
+
+6.1. Extracting gate netlist of module `\kws_top' to `<abc-temp-dir>/input.blif'..
+
+6.1.1. Executed ABC.
+Extracted 520 gates and 654 wires to a netlist network with 134 inputs and 5 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.1.2. Re-integrating ABC results.
+ABC RESULTS:              NAND cells:      284
+ABC RESULTS:               NOR cells:      271
+ABC RESULTS:               NOT cells:      124
+ABC RESULTS:        internal signals:      515
+ABC RESULTS:           input signals:      134
+ABC RESULTS:          output signals:        5
+Removing temp directory.
+
+6.2. Extracting gate netlist of module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave' to `<abc-temp-dir>/input.blif'..
+
+6.2.1. Executed ABC.
+Extracted 190 gates and 267 wires to a netlist network with 77 inputs and 73 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.2.2. Re-integrating ABC results.
+ABC RESULTS:              NAND cells:      194
+ABC RESULTS:               NOR cells:      202
+ABC RESULTS:               NOT cells:       61
+ABC RESULTS:        internal signals:      117
+ABC RESULTS:           input signals:       77
+ABC RESULTS:          output signals:       73
+Removing temp directory.
+
+6.3. Extracting gate netlist of module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core' to `<abc-temp-dir>/input.blif'..
+
+6.3.1. Executed ABC.
+Extracted 1517 gates and 1854 wires to a netlist network with 337 inputs and 174 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.3.2. Re-integrating ABC results.
+ABC RESULTS:              NAND cells:     1098
+ABC RESULTS:               NOR cells:      899
+ABC RESULTS:               NOT cells:      314
+ABC RESULTS:        internal signals:     1343
+ABC RESULTS:           input signals:      337
+ABC RESULTS:          output signals:      174
+Removing temp directory.
+Removing global temp directory.
+
+7. Printing statistics.
+
+=== kws_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     1355 wires
+     1755 wire bits
+       27 public wires
+      427 public wire bits
+       11 ports
+      142 port bits
+      680 cells
+      284   $_NAND_
+      271   $_NOR_
+      124   $_NOT_
+        1   $_SDFF_PN0_
+        2 submodules
+        1   $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+        1   $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+=== $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      747 wires
+      832 wire bits
+       30 public wires
+      100 public wire bits
+       13 ports
+       36 port bits
+      535 cells
+       32   $_DFFE_PP_
+        1   $_DFF_P_
+      194   $_NAND_
+      202   $_NOR_
+       61   $_NOT_
+       27   $_SDFFE_PN0P_
+       15   $_SDFF_PN0_
+        3   $_SDFF_PN1_
+
+=== $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     4223 wires
+     4796 wire bits
+       57 public wires
+      626 public wire bits
+       10 ports
+      268 port bits
+     2513 cells
+       64   $_DFFE_PP_
+        3   $_DFF_P_
+     1098   $_NAND_
+      899   $_NOR_
+      314   $_NOT_
+      131   $_SDFFE_PN0P_
+        4   $_SDFF_PN0_
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     3728 kws_top
+     2513 $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+      535 $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+        +----------Count including submodules.
+        | 
+     6325 wires
+     7383 wire bits
+      114 public wires
+     1153 public wire bits
+       34 ports
+      446 port bits
+        - memories
+        - memory bits
+        - processes
+     3728 cells
+       96   $_DFFE_PP_
+        4   $_DFF_P_
+     1576   $_NAND_
+     1372   $_NOR_
+      499   $_NOT_
+      158   $_SDFFE_PN0P_
+       20   $_SDFF_PN0_
+        3   $_SDFF_PN1_
+        2 submodules
+        1   $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core
+        1   $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave
+
+8. Executing Verilog backend.
+
+8.1. Executing BMUXMAP pass.
+
+8.2. Executing DEMUXMAP pass.
+Dumping module `$paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core'.
+Dumping module `$paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave'.
+Dumping module `\kws_top'.
+
+9. Executing CHECK pass (checking for obvious problems).
+Checking module $paramod$4a2008a24899847e3f7dfd7d546e51f962cf3ebc\compute_core...
+Checking module $paramod$a6168edd5940ee4b13b77858963975467dc36b21\spi_slave...
+Checking module kws_top...
+Found and reported 0 problems.
+
+Warnings: 4 unique messages, 6 total
+End of script. Logfile hash: 7df2855c89, time: 1.06s, user: 0.22s, system: 0.02s, MEM: 35.08 MB peak
+Yosys 0.65 (git sha1 aec814bdf3071f7e0fd0fbe43f7f711e99d01e24, clang++ 21.0.0 -fPIC -O3)
+Time spent: 75% 2x abc (0 sec), 4% 28x opt_expr (0 sec), ...

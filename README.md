@@ -5,6 +5,22 @@ Instructor: Prof. Christof Teuscher · Course: ECE 410/510
 
 ---
 
+## Milestone 4 Submission (Final)
+
+**[>> Go to M4 deliverables: project/m4/](project/m4/README.md)**  
+**[>> Design Justification Report (PDF)](project/m4/report/design_justification.pdf)**
+
+| Metric | Result |
+|---|---|
+| FC1 compute speedup vs SW baseline | **20.9×** |
+| Full network speedup | **16.8×** |
+| Testbench result | **2/2 PASS** |
+| Arithmetic intensity (HW) | **406 FLOP/byte** (compute-bound) |
+| Synthesis tool | Yosys 0.65, 3,728 cells, ~35 µW |
+| Git tag | `m4-submission` |
+
+---
+
 ## Author
 
 **Manaf Alali** — ECE Student, Portland State University

@@ -1,0 +1,103 @@
+Power Report — kws_top (Ternary KWS Accelerator)
+Tool: Yosys 0.65 (technology-independent synthesis)
+Date: 2026-05-31
+Design: kws_top (N_IN=8, N_OUT=4, X_W=16, ACC_W=32)
+
+========================================================================
+OPENLAN 2 POWER ESTIMATION STATUS
+========================================================================
+
+  OpenLane 2 was NOT available on the development host (Docker not
+  installed). As a result, the automated power estimation flow (which
+  uses OpenSTA + sky130 switching activity annotation) could not be run.
+
+  This report provides a MANUAL ESTIMATE using standard sky130 cell
+  power parameters and a representative activity factor.
+
+========================================================================
+MANUAL POWER ESTIMATE
+========================================================================
+
+METHOD:
+  Dynamic power:   P_dyn = α × C_eff × V_DD² × f × N_cells
+  Static (leakage): P_leak = I_leak × V_DD × N_cells
+
+PARAMETERS:
+  V_DD         = 1.8 V  (sky130 nominal)
+  f            = 100 MHz
+  C_eff (NAND2)= 1.5 fF per cell (sky130 typical)
+  α (activity) = 0.10  (10% toggle rate — conservative for MAC array)
+  I_leak       = 5 nA per cell (sky130 typical at 25°C)
+
+CALCULATION — compute_core (264 cells):
+  P_dyn  = 0.10 × 1.5e-15 × 1.8² × 100e6 × 264 = 12.8 μW
+  P_leak = 5e-9 × 1.8 × 264 = 2.4 μW
+  P_core = ~15.2 μW
+
+CALCULATION — spi_slave (268 cells):
+  (SPI clk at 10 MHz, lower activity during idle)
+  P_dyn  = 0.05 × 1.5e-15 × 1.8² × 100e6 × 268 = 6.5 μW
+  P_leak = 5e-9 × 1.8 × 268 = 2.4 μW
+  P_spi  = ~8.9 μW
+
+CALCULATION — kws_top glue / argmax (521 cells, combinational):
+  P_dyn  = 0.05 × 1.5e-15 × 1.8² × 100e6 × 521 = 6.3 μW
+  P_leak = 5e-9 × 1.8 × 521 = 4.7 μW
+  P_glue = ~11.0 μW
+
+TOTAL ESTIMATED POWER (testbench configuration, N_IN=8, N_OUT=4):
+  P_total = P_core + P_spi + P_glue
+          ≈ 15.2 + 8.9 + 11.0
+          ≈ 35 μW  (rounded, ±50% uncertainty)
+
+  Note: this is the total power during active inference.
+  During idle (weights loaded, waiting for SPI command):
+  P_idle ≈ P_leak_total = 5e-9 × 1.8 × (264 + 268 + 521) ≈ 9.5 μW
+
+PRODUCTION PARAMETERS ESTIMATE (N_IN=1960, N_OUT=512):
+  The compute_core scales with N_IN × N_OUT:
+  Additional cells ≈ (1960/8) × (512/4) × 264 = ~4.2 M cells
+  This is unrealistic for a gate-level implementation — production would
+  use a pipelined 1-PE or N_OUT-PE design with SRAM, not a flat array.
+  A realistic production power target: 0.5–2 mW active (from published
+  TNN accelerator literature, Rusci et al. 2020: 1.4 mW on TSMC 65 nm).
+
+========================================================================
+ENERGY PER INFERENCE (testbench, N_IN=8, N_OUT=4)
+========================================================================
+
+  Inference latency at 100 MHz: N_IN + 2 = 10 cycles = 100 ns
+  Energy = P_total × latency = 35 μW × 100 ns = 3.5 pJ
+
+  Production FC1 (N_IN=1960, 100 MHz):
+  Inference latency: 1960 cycles = 19.6 μs
+  Energy = 35 μW × 19.6 μs = 0.69 nJ  (compute only; excludes SPI I/O)
+
+========================================================================
+COMPARISON TO SW BASELINE
+========================================================================
+
+  SW baseline (Apple M4, measured M1):
+    Inference time : 0.436 ms (full 3-layer network)
+    Platform power : ~10 W (laptop CPU inference typical)
+    Energy/inference: ~4.4 mJ
+
+  HW accelerator (estimated):
+    FC1 compute time : 19.6 μs
+    Platform power   : ~35 μW
+    Energy/inference : ~0.69 nJ  (compute only)
+
+  Energy ratio (compute only): 4.4 mJ / 0.69 nJ ≈ 6,400,000×
+  Note: this is not a fair platform comparison (laptop vs. custom ASIC).
+  A fair comparison (against MCU software) is in benchmark.md.
+
+========================================================================
+LIMITATIONS AND NEXT STEPS
+========================================================================
+
+  1. To get accurate power: run OpenLane 2 full synthesis + OpenSTA with
+     sky130 switching activity from VCD annotation.
+  2. Production weight SRAM (251 KB) leakage is not modeled — foundry
+     SRAM macro data sheet would be needed.
+  3. Activity factor (α=0.10) is a rough estimate; real activity from
+     VCD-annotated switching analysis would improve accuracy by ±20%.

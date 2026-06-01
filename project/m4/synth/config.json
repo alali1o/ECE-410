@@ -1,0 +1,22 @@
+{
+  "DESIGN_NAME": "kws_top",
+  "VERILOG_FILES": [
+    "project/m4/rtl/compute_core.sv",
+    "project/m4/rtl/interface.sv",
+    "project/m4/rtl/top.sv"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10.0,
+  "CLOCK_FREQ_MHZ": 100.0,
+  "TOP_MODULE": "kws_top",
+  "PARAMETERS": {
+    "N_IN":  8,
+    "N_OUT": 4,
+    "X_W":   16,
+    "ACC_W": 32
+  },
+  "SYNTH_TOOL": "Yosys 0.65",
+  "TARGET_LIBRARY": "technology-independent (sky130 area/timing estimated)",
+  "ABC_SCRIPT": "-g cmos2",
+  "NOTE": "OpenLane 2 (Docker) unavailable on this host. Yosys technology-independent synthesis used. Cell counts are exact; area and timing are estimated from sky130 typical gate parameters. See synth_interpretation.md for methodology."
+}

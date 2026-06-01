@@ -1,0 +1,15 @@
+VCD info: dumpfile project/m4/sim/final_waveform.vcd opened for output.
+=== KWS Top-Level Testbench START ===
+[70000 ns] Reset released.
+[70000 ns] Loading weights...
+[710000 ns] Weights loaded.
+[710000 ns] Activations set: x = [1,2,3,4,5,6,7,8]
+[730000 ns] Sending SPI start command (write reg[1] = 0x01)...
+[2530000 ns] Start command sent.
+[2530000 ns] Polling status register...
+[4330000 ns] Done flag asserted after 1 polls.
+[6130000 ns] Argmax result from SPI reg[2] = 2
+[PASS] Argmax = 2 — correct. (y[2]=26 is maximum)
+=== 2/2 checks PASS ===
+RESULT: PASS
+project/m4/tb/tb_top.sv:271: $finish called at 6230000 (1ps)
